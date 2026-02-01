@@ -19,5 +19,5 @@ export class App {
   protected readonly title = signal('Sandbox');
 
   v = ''
-  d = '12344321'
+  d = '123321123'
 }
