@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles/base/_typography.css';
+@import 'styles/base/_font.css';
+@import 'styles/layout/_container.css';
+
+:root {
+  --primary-green: #2ecc71;
+  --primary-black: black;
+  --secondary-black: #0f1923;
+  --primary-white: white;
+  --primary-grey: #b1b1b1;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--primary-white);
+  margin: 0;
+}
+
+.tester {
+  border: 1px solid red;
+}
+
+.main-layout {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: relative;
+}
+
+
+
+
+.text-shadow {
+  text-shadow: 0 5px 10px rgba(0,0,0,1);
+}
+
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,0 +1,17 @@
+.standard-input-section {
+  border: 1px solid var(--primary-white);
+  border-radius: 1rem;
+  padding: 0.25rem;
+}
+
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--primary-white);
+}
+
+input:focus {
+  border: none;
+  outline: none;
+}
