@@ -8,10 +8,12 @@ import {CustomerRefSection} from './sections/customer-ref-section/customer-ref-s
 import {ContactSection} from './sections/contact-section/contact-section';
 import {MatFormField, MatInput} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
+import {CardGridSection} from './sections/card-grid-section/card-grid-section';
+import {FooterSection} from './sections/footer-section/footer-section';
 
 @Component({
   selector: 'app-root',
-  imports: [VideoHeroSection, TestPage, SearchbarHeaderSection, IntroSection, StatisticSection, CustomerRefSection, ContactSection, MatFormField, MatInput, FormsModule],
+  imports: [VideoHeroSection, TestPage, SearchbarHeaderSection, IntroSection, StatisticSection, CustomerRefSection, ContactSection, MatFormField, MatInput, FormsModule, CardGridSection, FooterSection],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
