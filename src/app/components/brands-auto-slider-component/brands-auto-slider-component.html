@@ -1,0 +1,54 @@
+<section class="brands-auto-slider-container">
+  <div class="container">
+    <p class="brands-title">
+      Geniese auch du Vorteile bei meinen Partnern
+    </p>
+    <div class="brands-wrapper">
+      <div class="brands-track">
+
+        <!-- ORIGINAL -->
+        <div class="brands-slide">
+          @for (brand of brands; track brand) {
+            <div class="brand-item">
+              <mat-icon>{{ brand.icon }}</mat-icon>
+              <span>{{ brand.name }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- CLONE 1 -->
+        <div class="brands-slide">
+          @for (brand of brands; track brand) {
+            <div class="brand-item">
+              <mat-icon>{{ brand.icon }}</mat-icon>
+              <span>{{ brand.name }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- CLONE 2 (wichtig!) -->
+        <div class="brands-slide">
+          @for (brand of brands; track brand) {
+            <div class="brand-item">
+              <mat-icon>{{ brand.icon }}</mat-icon>
+              <span>{{ brand.name }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- CLONE 3 (wichtig!) -->
+        <div class="brands-slide">
+          @for (brand of brands; track brand) {
+            <div class="brand-item">
+              <mat-icon>{{ brand.icon }}</mat-icon>
+              <span>{{ brand.name }}</span>
+            </div>
+          }
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</section>

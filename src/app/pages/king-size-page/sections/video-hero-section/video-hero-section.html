@@ -1,0 +1,43 @@
+<section class="video-hero-container" [style.height]="height()">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="video-background"
+  >
+    <source src="{{videoUrl()}}" type="video/mp4" />
+  </video>
+  <div class="container">
+    <div class="hero-wrapper">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span class="white-text">{{introText()}}</span>
+        </div>
+        <h1 class="white-text text-shadow">
+          {{ titleLine1() }}
+          <br>
+          {{ titleLine2() }}
+        </h1>
+        <p class="grey-text">
+          {{ subTitleLine1() }}
+          <br>
+          {{ subTitleLine2() }}
+        </p>
+        @if (displayButton()) {
+          <div class="hero-button-wrapper">
+            <app-king-size-button
+              [btnText]="'Erstgespräch vereinbaren'"
+            ></app-king-size-button>
+            <app-king-size-button
+              [target]="'/king-size/contact'"
+              [btnText]="'Starte jetzt'"
+            ></app-king-size-button>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>

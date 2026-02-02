@@ -1,21 +1,15 @@
-
 @if (v === d) {
-  <!--<app-header-section></app-header-section>
-<app-video-hero-section></app-video-hero-section>
-<app-orbit-section></app-orbit-section>-->
-  <app-searchbar-header-section></app-searchbar-header-section>
-  <app-video-hero-section></app-video-hero-section>
-  <app-statistic-section></app-statistic-section>
-  <app-intro-section></app-intro-section>
-  <app-customer-ref-section></app-customer-ref-section>
-  <app-card-grid-section></app-card-grid-section>
-  <app-contact-section></app-contact-section>
-  <app-footer-section></app-footer-section>
+  <router-outlet></router-outlet>
 }
 
 @if(v !== d) {
   <mat-form-field appearance="outline" style="padding: 5rem">
-    <input matInput [(ngModel)]="v" placeholder="Eingabe erforderlich!" />
+    <input
+      matInput
+      [(ngModel)]="v"
+      (ngModelChange)="checkValue()"
+      placeholder="Eingabe erforderlich!"
+    />
   </mat-form-field>
 
 }

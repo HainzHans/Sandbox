@@ -1,0 +1,114 @@
+.video-hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertikal */
+}
+
+
+.video-hero-container .container {
+  position: relative;
+  z-index: 3; /* über Video, Overlay und Gradient */
+}
+
+
+.video-hero-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 200px; /* wie stark der Fade sein soll */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    var(--primary-black) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+/* OPTIONAL: dunkler Overlay für bessere Lesbarkeit */
+.video-hero-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+
+/* FULL-WIDTH VIDEO */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-wrapper {
+  padding: 2rem 0;
+  margin: auto 0;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.02); /* leicht transparent */
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem; /* pill shape */
+  backdrop-filter: blur(6px); /* moderner Glass-Effekt */
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.badge-dot {
+  background-color: var(--primary-green);
+  border-radius: 2rem;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  flex: none;
+}
+
+.hero-button-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+@media (min-width: 1024px) {
+  .hero-button-wrapper {
+    flex-direction: row;
+  }
+
+  .hero-text {
+    width: 75%;
+    max-width: 75%;
+  }
+}
