@@ -1,0 +1,30 @@
+.appointment-form-container {
+  background: var(--primary-black);
+  padding-bottom: 10rem;
+}
+
+.appointment-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.appointment-form-left {
+  flex: 1;
+}
+
+.appointment-form-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media (min-width: 1024px) {
+  .appointment-form-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}

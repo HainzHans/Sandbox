@@ -1,0 +1,35 @@
+<div class="custom-calendar">
+  <div class="calendar-header">
+    <button (click)="prevMonth()">
+      <mat-icon class="icon">arrow_left</mat-icon>
+    </button>
+    <div>{{ monthYear }}</div>
+    <button (click)="nextMonth()">
+      <mat-icon class="icon">arrow_right</mat-icon>
+    </button>
+  </div>
+
+  <div class="calendar-weekdays">
+    <div>Mo</div>
+    <div>Di</div>
+    <div>Mi</div>
+    <div>Do</div>
+    <div>Fr</div>
+    <div>Sa</div>
+    <div>So</div>
+  </div>
+
+  <div class="calendar-days">
+    @for (day of days; track day) {
+      <div
+        [class.other-month]="day.otherMonth"
+        [class.today]="day.isToday"
+        [class.selected]="isSelected(day)"
+        (click)="selectDay(day)"
+      >
+        {{ day.date.getDate() }}
+      </div>
+    }
+
+  </div>
+</div>
