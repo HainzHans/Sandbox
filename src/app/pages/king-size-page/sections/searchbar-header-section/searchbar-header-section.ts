@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {StandardInput} from '../../../../components/input/standard-input/standard-input';
 import {KingSizeButton} from '../../../../components/buttons/king-size-button/king-size-button';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-searchbar-header-section',
@@ -14,5 +15,11 @@ import {KingSizeButton} from '../../../../components/buttons/king-size-button/ki
   styleUrl: './searchbar-header-section.css',
 })
 export class SearchbarHeaderSection {
+
+  constructor(private router: Router) {}
+
+  navigateHome() {
+    this.router.navigate(['/king-size'])
+  }
 
 }
