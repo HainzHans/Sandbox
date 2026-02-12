@@ -1,0 +1,19 @@
+<section class="header-container">
+  <div class="container">
+    <div class="header-wrapper">
+      <div class="left-header-box">
+        <mat-icon (click)="navigateHome()" style="cursor: pointer">rocket_launch</mat-icon>
+      </div>
+      <div class="right-header-box">
+        <app-icon-button-component
+          [icon]="'account_circle'"
+          [target]="'/king-size/overview'"
+        ></app-icon-button-component>
+        <app-king-size-button
+          [target]="'/king-size/contact'"
+          [btnText]="'Starte jetzt'"
+        ></app-king-size-button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+.intro-section {
+  background-color: var(--secondary-black);
+  height: 27vh;
+  padding-top: 3rem;
+}
+
+.intro-wrapper {
+  padding-top: 6rem;
+}

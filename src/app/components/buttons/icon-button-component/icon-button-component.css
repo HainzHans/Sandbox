@@ -1,0 +1,8 @@
+.icon-button {
+  color: var(--primary-white);
+  transition: background-color 0.25s ease;
+}
+
+.icon-button:hover {
+  background-color: var(--primary-green);
+}

@@ -8,6 +8,7 @@ import {SearchbarHeaderSection} from "./sections/searchbar-header-section/search
 import {StatisticSection} from "./sections/statistic-section/statistic-section";
 import {VideoHeroSection} from "./sections/video-hero-section/video-hero-section";
 import {BrandsAutoSliderComponent} from '../../components/brands-auto-slider-component/brands-auto-slider-component';
+import {KingSizeHeaderSection} from './sections/king-size-header-section/king-size-header-section';
 
 @Component({
   selector: 'app-king-size-page',
@@ -20,7 +21,8 @@ import {BrandsAutoSliderComponent} from '../../components/brands-auto-slider-com
     SearchbarHeaderSection,
     StatisticSection,
     VideoHeroSection,
-    BrandsAutoSliderComponent
+    BrandsAutoSliderComponent,
+    KingSizeHeaderSection
   ],
   templateUrl: './king-size-page.html',
   styleUrl: './king-size-page.css',

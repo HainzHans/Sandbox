@@ -12,3 +12,16 @@
   box-sizing: border-box;
   position: relative;
 }
+
+.big-container {
+  width: 100%;
+  margin: auto;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+}
+
+.white-background {
+  background-color: var(--secondary-white);
+}

@@ -1,0 +1,55 @@
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary-white);
+  color: var(--primary-black);
+
+
+  border-radius: 9999px; /* komplett rund */
+  cursor: pointer;
+
+  border: 1px solid var(--primary-grey);
+
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--primary-green);
+  transform: translateY(-2px);
+  color: var(--primary-white);
+
+}
+.nav-button.active {
+  background-color: var(--primary-green);
+  color: var(--primary-white);
+}
+
+.nav-button.active mat-icon {
+  color: var(--primary-white);
+}
+
+.nav-button mat-icon {
+  font-size: 20px;
+  color: var(--primary-green);
+}
+
+.nav-button:hover mat-icon {
+  color: var(--primary-white);
+}
+
+/* Unter 768px: Text ausblenden */
+.nav-button .label {
+  display: none;
+}
+
+
+/* Ab 768px: Text wieder anzeigen */
+@media (min-width: 768px) {
+  .nav-button .label {
+    display: inline;
+  }
+}
