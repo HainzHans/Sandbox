@@ -5,10 +5,15 @@
 :root {
   --primary-green: #2ecc71;
   --primary-black: black;
-  --secondary-black: #0f1923;
+  --secondary-black: #262d33;
   --primary-white: white;
   --secondary-white: #f7f7f7;
   --primary-grey: #b1b1b1;
+
+  --app-white: #fdfdfd;
+  --app-grey: #b0b5b6;
+  --app-black: #141414;
+  --app-secondary-black: #24282e;
 }
 
 body {

@@ -1,0 +1,33 @@
+.overview-section {
+  padding-top: 3rem;
+  height: calc(100% - 3rem);
+  position: relative;
+}
+
+.overview-wrapper {
+  position: relative;
+}
+
+.overview-button-wrapper {
+  padding-bottom: 3rem;
+}
+
+/* Einzelner Button */
+.nav-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%); /* 50% nach oben raus */
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+
+.section-content {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+

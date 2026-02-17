@@ -1,0 +1,28 @@
+<nav class="side-nav-container">
+  <div class="side-nav-wrapper">
+
+    <div class="side-nav-logo">
+      <mat-icon>rocket_launched</mat-icon>
+    </div>
+
+    <div class="side-nav-content">
+      <div class="item-container">
+
+        @for (app of allAppSections; track app.id) {
+          <app-app-side-nav-button-component
+            [appSection]="app"
+            (onBtnClicked)="btnClicked(app)"
+          ></app-app-side-nav-button-component>
+        }
+
+      </div>
+    </div>
+
+    <div class="side-nav-footer">
+      <div class="side-nav-item logout">
+        <mat-icon>logout</mat-icon>
+      </div>
+    </div>
+
+  </div>
+</nav>

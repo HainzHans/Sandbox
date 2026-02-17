@@ -72,3 +72,7 @@ span {
 .grey-text {
  color: var(--primary-grey);
 }
+
+.green-text {
+  color: var(--primary-green);
+}

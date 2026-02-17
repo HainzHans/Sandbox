@@ -1,0 +1,26 @@
+.home-section {
+  color: var(--app-white);
+  height: 100%;
+}
+
+.home-container {
+  display: flex;
+  height: 100%;
+  gap: 6rem;
+}
+
+.home-left-container {
+  text-align: center;
+  align-self: center;
+  flex: 4;
+}
+
+.home-right-container {
+  flex: 1;
+}
+
+.home-right-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

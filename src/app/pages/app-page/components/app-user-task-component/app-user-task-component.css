@@ -1,0 +1,61 @@
+.user-task-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  color: var(--app-white);
+}
+
+.user-task-title {
+  font-weight: bold;
+}
+
+.user-task-wrapper {
+  display: flex;
+  align-items: center;
+
+  background: var(--app-secondary-black);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Icon links, kleiner Abstand */
+.user-task-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: var(--primary-grey);
+}
+
+/* Content in der Mitte */
+.user-task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-grow: 1; /* sorgt für großen Abstand zum Button */
+}
+
+/* Badge exakt so breit wie das Wort */
+.task-status {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+
+  padding: 2px 8px;
+  border-radius: 6px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block; /* WICHTIG: nur so breit wie Inhalt */
+  width: fit-content;    /* garantiert minimale Breite */
+  line-height: 1.2;
+}
+
+
+
+/* Button rechts, großer Abstand */
+.user-task-button {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}

@@ -1,0 +1,16 @@
+<div class="app-layout">
+
+    <app-app-side-navigation-component ></app-app-side-navigation-component>
+
+    <div class="big-container">
+      <app-app-header-component></app-app-header-component>
+      <div class="content-container">
+
+        @if (activeAppSection) {
+          <ng-container *ngComponentOutlet="activeAppSection.component"></ng-container>
+        }
+
+      </div>
+    </div>
+
+</div>

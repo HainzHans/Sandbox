@@ -19,7 +19,7 @@ export class App {
 
   checkValue() {
     if (this.v === this.d) {
-      this.router.navigate(['/king-size']);
+      this.router.navigate(['']);
     }
   }
 

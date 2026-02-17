@@ -1,0 +1,12 @@
+
+.header-nav-button {
+  border: none;
+  background-color: transparent;
+  color: var(--primary-grey);
+  cursor: pointer;
+}
+
+.active-header-nav-button {
+  color: var(--primary-green);
+  border-bottom: 1px solid var(--primary-green);
+}

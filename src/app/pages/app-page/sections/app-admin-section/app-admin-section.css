@@ -1,0 +1,7 @@
+.admin-section {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  color: var(--app-white);
+  height: 100%;
+}

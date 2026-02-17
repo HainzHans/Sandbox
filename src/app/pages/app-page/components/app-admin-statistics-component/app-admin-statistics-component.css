@@ -1,0 +1,27 @@
+.admin-statistics-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.admin-statistics-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: var(--app-secondary-black);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+}
+
+.card-icon {
+  font-size: 3rem;
+  height: 48px;
+  width: 48px;
+}
+
+.card-content {
+  display: flex;
+  text-align: end;
+  flex-direction: column;
+}
