@@ -1,0 +1,21 @@
+<section class="header-container">
+  <div class="container">
+    <div class="header-wrapper">
+      <div class="left-header-box">
+        <img
+          src="assets/images/logo_black.png"
+          alt="Logo"
+          class="header-logo"
+          (click)="navigateHome()"
+        />
+      </div>
+
+      <div class="right-header-box">
+        <app-king-size-button
+          [target]="'/contact'"
+          [btnText]="'Starte jetzt'"
+        ></app-king-size-button>
+      </div>
+    </div>
+  </div>
+</section>

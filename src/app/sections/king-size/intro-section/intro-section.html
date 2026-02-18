@@ -1,0 +1,78 @@
+<section class="intro-container">
+  <div class="container">
+    <div class="intro-wrapper">
+      <h2 class="intro-text">
+        Hier dreht sich alles um
+        <br>
+        deinen Erfolg
+      </h2>
+      <p class="grey-text intro-text">
+        Mit meiner Hilfe machten unzählige Kunden schon reale Profite am Markt
+        <br>
+        und genau das kannst du auch!
+      </p>
+      <div class="intro-content">
+        <div class="intro-card">
+          <div class="intro-card-orbit-content">
+            <app-orbit-component></app-orbit-component>
+          </div>
+          <div class="intro-card-footer">
+            <h4>Die Zeit ist gekommen</h4>
+            <span class="grey-text">Es wird Zeit deine Ziele zu erreichen und ich helfe dir dabei</span>
+          </div>
+        </div>
+        <div style="flex: 1; display: flex; gap: 2rem; flex-direction: column;">
+          <div class="intro-card">
+            <h6>Das gebe ich auf den Weg:</h6>
+            <div class="intro-list">
+              <div class="intro-list-item">
+                <mat-icon>trending_up</mat-icon>
+                <span>NASDAQ Setup</span>
+              </div>
+              <div class="intro-list-item">
+                <mat-icon>shield</mat-icon>
+                <span>Risk Management</span>
+              </div>
+              <div class="intro-list-item">
+                <mat-icon>article</mat-icon>
+                <span>News richtig lesen</span>
+              </div>
+              <div class="intro-list-item">
+                <mat-icon>autorenew</mat-icon>
+                <span>Phasen des Wirtschaftszyklus</span>
+              </div>
+              <div class="intro-list-item">
+                <mat-icon>menu_book</mat-icon>
+                <span>Trading Workbook</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="intro-card">
+            <h6>Diesen Monat verfügbar:</h6>
+
+            <div class="spots-box">
+              <div class="spots-count">
+                <span class="spots-number">5</span>
+                <span class="spots-total">/ 10 Plätze frei</span>
+              </div>
+
+              <span class="spots-text grey-text">
+                <span>Starte noch heute und sichere dir deinen Platz</span>
+              </span>
+
+              <app-king-size-button
+                [target]="'/contact'"
+                [btnText]="'Platz sichern'"
+              ></app-king-size-button>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import {CardGridSection} from "./sections/card-grid-section/card-grid-section";
-import {ContactSection} from "./sections/contact-section/contact-section";
-import {CustomerRefSection} from "./sections/customer-ref-section/customer-ref-section";
-import {FooterSection} from "./sections/footer-section/footer-section";
-import {IntroSection} from "./sections/intro-section/intro-section";
-import {SearchbarHeaderSection} from "./sections/searchbar-header-section/searchbar-header-section";
-import {StatisticSection} from "./sections/statistic-section/statistic-section";
-import {VideoHeroSection} from "./sections/video-hero-section/video-hero-section";
+import {CardGridSection} from "../../sections/king-size/card-grid-section/card-grid-section";
+import {ContactSection} from "../../sections/king-size/contact-section/contact-section";
+import {CustomerRefSection} from "../../sections/king-size/customer-ref-section/customer-ref-section";
+import {FooterSection} from "../../sections/shared/footer-section/footer-section";
+import {IntroSection} from "../../sections/king-size/intro-section/intro-section";
+import {StatisticSection} from "../../sections/king-size/statistic-section/statistic-section";
+import {HeroSection} from "../../sections/shared/hero-section/hero-section";
 import {BrandsAutoSliderComponent} from '../../components/brands-auto-slider-component/brands-auto-slider-component';
-import {KingSizeHeaderSection} from './sections/king-size-header-section/king-size-header-section';
+import {HeaderSection} from '../../sections/shared/header-section/header-section';
+import {FaqSection} from '../../sections/king-size/faq-section/faq-section';
 
 @Component({
   selector: 'app-king-size-page',
@@ -18,11 +18,11 @@ import {KingSizeHeaderSection} from './sections/king-size-header-section/king-si
     CustomerRefSection,
     FooterSection,
     IntroSection,
-    SearchbarHeaderSection,
     StatisticSection,
-    VideoHeroSection,
+    HeroSection,
     BrandsAutoSliderComponent,
-    KingSizeHeaderSection
+    HeaderSection,
+    FaqSection
   ],
   templateUrl: './king-size-page.html',
   styleUrl: './king-size-page.css',
