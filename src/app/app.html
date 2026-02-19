@@ -2,14 +2,15 @@
   <router-outlet></router-outlet>
 }
 
-@if(v !== d) {
-  <mat-form-field appearance="outline" style="padding: 5rem">
+@if (v !== d) {
+  <div style="padding: 5rem; color: black">
     <input
-      matInput
+      pInputText
+      class="input-outline w-full"
       [(ngModel)]="v"
       (ngModelChange)="checkValue()"
       placeholder="Eingabe erforderlich!"
     />
-  </mat-form-field>
 
+  </div>
 }

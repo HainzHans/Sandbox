@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {MatCalendar} from "@angular/material/datepicker";
-import {MatIcon} from '@angular/material/icon';
 
 interface CalendarDay {
   date: Date;
@@ -11,9 +9,7 @@ interface CalendarDay {
 
 @Component({
   selector: 'app-king-size-calendar-component',
-  imports: [
-    MatIcon
-  ],
+  imports: [],
   templateUrl: './king-size-calendar-component.html',
   styleUrl: './king-size-calendar-component.css',
 })

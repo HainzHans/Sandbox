@@ -1,7 +1,178 @@
 <section class="appointment-form-container">
   <div class="container">
-    <div class="appointment-form-wrapper">
-      Platzhalter
+    <div class="appointment-form-card">
+
+      <!-- Linke Spalte -->
+      <div class="form-left">
+        <img src="assets/images/logo_black.png" alt="Logo" class="header-logo" />
+      </div>
+
+      <!-- Rechte Spalte -->
+      <div class="form-right">
+
+        <!-- Stepper -->
+        <p-stepper [(value)]="activeStep" class="stepper">
+
+          <!-- Step Icons -->
+          <p-step-list>
+            <p-step [value]="1">
+              <ng-template pTemplate="content" let-value="value">
+                <div class="step-icon" [class.active]="value <= activeStep">
+                  <i class="pi pi-user"></i>
+                </div>
+              </ng-template>
+            </p-step>
+
+            <p-step [value]="2">
+              <ng-template pTemplate="content" let-value="value">
+                <div class="step-icon" [class.active]="value <= activeStep">
+                  <i class="pi pi-calendar"></i>
+                </div>
+              </ng-template>
+            </p-step>
+
+            <p-step [value]="3">
+              <ng-template pTemplate="content" let-value="value">
+                <div class="step-icon" [class.active]="value <= activeStep">
+                  <i class="pi pi-shopping-cart"></i>
+                </div>
+              </ng-template>
+            </p-step>
+          </p-step-list>
+
+          <!-- Step Panels -->
+          <p-step-panels>
+
+            <!-- STEP 1 -->
+            <p-step-panel [value]="1">
+              <ng-template #content>
+                <div class="form-wrapper">
+
+                  <div class="form-field">
+                    <label for="name">Vollständiger Name</label>
+                    <input id="name" pInputText [(ngModel)]="customerName" placeholder="Max Mustermann" />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="phone">Telefon</label>
+                    <input id="phone" pInputText [(ngModel)]="customerPhone" placeholder="000 12345678" />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="email">E-Mail</label>
+                    <input id="email" pInputText [(ngModel)]="customerEmail" placeholder="mustermann@gmail.com" />
+                  </div>
+
+                </div>
+              </ng-template>
+            </p-step-panel>
+
+            <!-- STEP 2 -->
+            <p-step-panel [value]="2">
+              <ng-template #content>
+                <div class="date-time-grid">
+
+                  <!-- Datum -->
+                  <div class="date-column">
+                    <label for="date">Datum auswählen</label>
+                    <p-datepicker
+                      id="date"
+                      [(ngModel)]="selectedDate"
+                      [minDate]="today"
+                      [inline]="true"
+                      [showIcon]="false">
+                    </p-datepicker>
+                  </div>
+
+                  <!-- Uhrzeit -->
+                  <div class="time-column">
+                    <label>Uhrzeit auswählen</label>
+
+                    <div class="time-grid">
+                      @for (time of availableTimes; track time) {
+                        <div
+                          class="time-card"
+                          [class.active]="selectedTime === time.value"
+                          (click)="selectedTime = time.value">
+                          {{ time.label }}
+                        </div>
+                      }
+                    </div>
+                  </div>
+
+                </div>
+              </ng-template>
+            </p-step-panel>
+
+            <!-- STEP 3 -->
+            <!-- STEP 3 -->
+            <p-step-panel [value]="3">
+              <ng-template #content>
+                <div class="form-wrapper">
+
+                  <div class="summary-item">
+                    <span class="summary-label">Name:</span>
+                    <span class="summary-value">{{ customerName }}</span>
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="summary-label">Telefon:</span>
+                    <span class="summary-value">{{ customerPhone }}</span>
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="summary-label">E-Mail:</span>
+                    <span class="summary-value">{{ customerEmail }}</span>
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="summary-label">Datum:</span>
+                    <span class="summary-value">{{ selectedDate | date:'dd.MM.yyyy' }}</span>
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="summary-label">Uhrzeit:</span>
+                    <span class="summary-value">{{ selectedTime }}</span>
+                  </div>
+                </div>
+                <div class="button-wrapper">
+                  <app-king-size-button
+                    [btnText]="'Jetzt bestellen'"
+                  ></app-king-size-button>
+                </div>
+
+              </ng-template>
+            </p-step-panel>
+
+
+          </p-step-panels>
+        </p-stepper>
+
+        <!-- Buttons unten -->
+        <div class="card-actions">
+
+          @if (activeStep > 1) {
+            <p-button
+              label="Back"
+              severity="secondary"
+              icon="pi pi-arrow-left"
+              (onClick)="activeStep = activeStep - 1">
+            </p-button>
+          }
+
+          @if (activeStep < 3) {
+            <div></div>
+            <p-button
+              label="Next"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              [disabled]="(activeStep === 1 && !isStep1Valid) || (activeStep === 2 && !isStep2Valid)"
+              (onClick)="activeStep = activeStep + 1">
+            </p-button>
+          }
+
+        </div>
+      </div>
     </div>
   </div>
 </section>

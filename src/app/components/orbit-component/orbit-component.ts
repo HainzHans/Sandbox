@@ -1,11 +1,8 @@
 import {AfterViewInit, Component, ElementRef} from '@angular/core';
-import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-orbit-component',
-    imports: [
-        MatIcon
-    ],
+  imports: [],
   templateUrl: './orbit-component.html',
   styleUrl: './orbit-component.css',
 })

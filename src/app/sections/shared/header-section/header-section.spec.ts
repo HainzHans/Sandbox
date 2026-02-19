@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StandardInput } from './standard-input';
+import { HeaderSection } from './header-section';
 
-describe('StandardInput', () => {
-  let component: StandardInput;
-  let fixture: ComponentFixture<StandardInput>;
+describe('HeaderSection', () => {
+  let component: HeaderSection;
+  let fixture: ComponentFixture<HeaderSection>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StandardInput]
+      imports: [HeaderSection]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StandardInput);
+    fixture = TestBed.createComponent(HeaderSection);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

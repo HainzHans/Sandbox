@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-faq-section',
   imports: [
-    MatIcon
+    NgClass
   ],
   templateUrl: './faq-section.html',
   styleUrl: './faq-section.css',

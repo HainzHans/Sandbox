@@ -9,8 +9,6 @@
 
 .faq-header {
   text-align: center;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
 }
 
 .faq-wrapper {
@@ -56,12 +54,12 @@
   margin: 0;
 }
 
-.faq-question mat-icon {
+.faq-question i {
   color: var(--primary-green);
   transition: transform 0.3s ease;
 }
 
-.faq-item.open mat-icon {
+.faq-item.open i {
   transform: rotate(180deg);
 }
 
@@ -94,10 +92,6 @@
     padding: 0 3rem;
   }
 
-  .faq-header {
-    font-size: 2.2rem;
-  }
-
   .faq-item {
     padding: 1.4rem 1.8rem;
   }
@@ -122,10 +116,6 @@
 
   .faq-wrapper {
     padding: 0 6rem;
-  }
-
-  .faq-header {
-    font-size: 2.6rem;
   }
 
   .faq-item {

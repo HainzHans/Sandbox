@@ -63,8 +63,8 @@
   color: var(--primary-grey);
 }
 
-.intro-list-item mat-icon {
-  font-size: 20px;
+.intro-list-item i {
+  font-size: 1.5rem;
   color: var(--primary-green);
 }
 

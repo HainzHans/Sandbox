@@ -13,7 +13,10 @@
         <div class="faq-item" (click)="toggleFAQ(0)" [class.open]="openedFAQ === 0">
           <div class="faq-question">
             <h6>Wie läuft das Coaching ab?</h6>
-            <mat-icon>{{ openedFAQ === 0 ? 'expand_less' : 'expand_more' }}</mat-icon>
+            <i
+              class="pi"
+              [ngClass]="openedFAQ === 4 ? 'pi-chevron-up' : 'pi-chevron-down'"
+            ></i>
           </div>
 
           <div class="faq-answer-wrapper">
@@ -27,7 +30,10 @@
         <div class="faq-item" (click)="toggleFAQ(1)" [class.open]="openedFAQ === 1">
           <div class="faq-question">
             <h6>Brauche ich Vorkenntnisse?</h6>
-            <mat-icon>{{ openedFAQ === 1 ? 'expand_less' : 'expand_more' }}</mat-icon>
+            <i
+              class="pi"
+              [ngClass]="openedFAQ === 4 ? 'pi-chevron-up' : 'pi-chevron-down'"
+            ></i>
           </div>
 
           <div class="faq-answer-wrapper">
@@ -41,7 +47,10 @@
         <div class="faq-item" (click)="toggleFAQ(2)" [class.open]="openedFAQ === 2">
           <div class="faq-question">
             <h6>Wie viel Zeit muss ich investieren?</h6>
-            <mat-icon>{{ openedFAQ === 2 ? 'expand_less' : 'expand_more' }}</mat-icon>
+            <i
+              class="pi"
+              [ngClass]="openedFAQ === 4 ? 'pi-chevron-up' : 'pi-chevron-down'"
+            ></i>
           </div>
 
           <div class="faq-answer-wrapper">
@@ -55,7 +64,10 @@
         <div class="faq-item" (click)="toggleFAQ(3)" [class.open]="openedFAQ === 3">
           <div class="faq-question">
             <h6>Was kostet das Coaching?</h6>
-            <mat-icon>{{ openedFAQ === 3 ? 'expand_less' : 'expand_more' }}</mat-icon>
+            <i
+              class="pi"
+              [ngClass]="openedFAQ === 4 ? 'pi-chevron-up' : 'pi-chevron-down'"
+            ></i>
           </div>
 
           <div class="faq-answer-wrapper">
@@ -69,7 +81,10 @@
         <div class="faq-item" (click)="toggleFAQ(4)" [class.open]="openedFAQ === 4">
           <div class="faq-question">
             <h6>Was passiert nach der Buchung?</h6>
-            <mat-icon>{{ openedFAQ === 4 ? 'expand_less' : 'expand_more' }}</mat-icon>
+            <i
+              class="pi"
+              [ngClass]="openedFAQ === 4 ? 'pi-chevron-up' : 'pi-chevron-down'"
+            ></i>
           </div>
 
           <div class="faq-answer-wrapper">

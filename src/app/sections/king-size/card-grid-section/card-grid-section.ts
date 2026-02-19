@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-card-grid-section',
-  imports: [
-    MatIcon
-  ],
+  imports: [],
   templateUrl: './card-grid-section.html',
   styleUrl: './card-grid-section.css',
 })

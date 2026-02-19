@@ -1,11 +1,9 @@
 import {AfterViewInit, Component, ElementRef, HostListener} from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
 import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-customer-ref-section',
   imports: [
-    MatIcon,
     NgClass
   ],
   templateUrl: './customer-ref-section.html',

@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 @import 'styles/base/_typography.css';
 @import 'styles/base/_font.css';
 @import 'styles/layout/_container.css';
