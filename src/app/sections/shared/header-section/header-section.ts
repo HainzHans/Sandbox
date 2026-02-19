@@ -15,7 +15,7 @@ export class HeaderSection {
   constructor(private router: Router) {}
 
   navigateHome() {
-    this.router.navigate(['/king-size'])
+    this.router.navigate([''])
   }
 
 }
