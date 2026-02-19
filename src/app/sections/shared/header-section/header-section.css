@@ -8,8 +8,8 @@
 }
 
 .header-logo {
-  width: 75px;        /* oder 48px, je nach Look */
-  height: 75px;       /* quadratisch */
+  width: 70px;        /* oder 48px, je nach Look */
+  height: 70px;       /* quadratisch */
   object-fit: cover;  /* falls das Bild nicht exakt quadratisch ist */
   cursor: pointer;
 }

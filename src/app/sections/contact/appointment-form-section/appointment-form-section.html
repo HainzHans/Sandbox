@@ -153,7 +153,7 @@
 
           @if (activeStep > 1) {
             <p-button
-              label="Back"
+              label="Zurück"
               severity="secondary"
               icon="pi pi-arrow-left"
               (onClick)="activeStep = activeStep - 1">
@@ -163,7 +163,7 @@
           @if (activeStep < 3) {
             <div></div>
             <p-button
-              label="Next"
+              label="Weiter"
               icon="pi pi-arrow-right"
               iconPos="right"
               [disabled]="(activeStep === 1 && !isStep1Valid) || (activeStep === 2 && !isStep2Valid)"
