@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import {AppointmentStepsComponent} from '../../../components/appointment-steps-component/appointment-steps-component';
 import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 import {PrimeTemplate} from 'primeng/api';
 import {Button} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
-import {Select} from 'primeng/select';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {KingSizeButton} from '../../../components/buttons/king-size-button/king-size-button';
@@ -22,7 +20,6 @@ import {KingSizeButton} from '../../../components/buttons/king-size-button/king-
     StepPanel,
     InputText,
     FormsModule,
-    Select,
     DatePicker,
     DatePipe,
     KingSizeButton

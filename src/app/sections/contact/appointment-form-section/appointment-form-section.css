@@ -251,6 +251,25 @@
   padding-top: 2rem;
 }
 
+
+
+.btn-clean {
+  padding: 0.9rem 2rem;
+  background: transparent;
+  border: 1px solid var(--primary-green);
+  color: var(--primary-green);
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-clean:hover {
+  background: var(--primary-green);
+  color: var(--primary-white);
+}
+
 /* ----------------------------- */
 /* TABLET                        */
 /* ----------------------------- */
@@ -306,3 +325,4 @@
     font-size: 1.5rem;
   }
 }
+

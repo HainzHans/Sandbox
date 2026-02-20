@@ -127,6 +127,42 @@ export class CustomerRefSection implements AfterViewInit {
       name: 'Regina Mustermann',
       review: 5
     },
+    {
+      name: 'Max Mustermann',
+      review: 4
+    },
+    {
+      name: 'Sepp Mustermann',
+      review: 5
+    },
+    {
+      name: 'Maier Holz',
+      review: 5
+    },
+    {
+      name: 'Frau Maier',
+      review: 4
+    },
+    {
+      name: 'Klaus Klaus',
+      review: 4
+    },
+    {
+      name: 'Max Mustermann',
+      review: 5
+    },
+    {
+      name: 'Max Mustermann',
+      review: 4
+    },
+    {
+      name: 'Martina H.',
+      review: 5
+    },
+    {
+      name: 'Regina Mustermann',
+      review: 5
+    }
   ]
 
 }
