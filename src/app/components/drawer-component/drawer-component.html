@@ -1,0 +1,64 @@
+<p-drawer
+  [visible]="visible()"
+  (onHide)="onHide()"
+  position="right"
+>
+  @if (appointmentDrawer()) {
+    <div class="drawer-content">
+      <span class="title">Neuen Termin erstellen</span>
+
+      <div class="form-field">
+        <label for="date">Datum</label>
+        <p-datepicker
+          [(ngModel)]="appointmentDate"
+          inputId="date"
+          dateFormat="dd.mm.yy"
+        ></p-datepicker>
+      </div>
+
+      <div class="form-field">
+        <label for="time">Uhrzeit</label>
+        <p-inputmask
+          [(ngModel)]="appointmentTime"
+          mask="99:99"
+          placeholder="HH:MM"
+          inputId="time"
+        ></p-inputmask>
+      </div>
+
+      <p-button
+        label="Speichern"
+        icon="pi pi-check"
+        (click)="saveAppointmentSlot()"
+        [disabled]="!appointmentDate || !appointmentTime"
+        styleClass="w-full"
+      ></p-button>
+    </div>
+  } @else if (settingsDrawer()) {
+    <div class="drawer-content">
+      <span class="title">Einstellungen</span>
+
+      <div class="form-field">
+        <label for="max">Max. Termine pro Monat</label>
+        <input
+          type="number"
+          id="max"
+          [(ngModel)]="maxAppointments"
+          min="1"
+          class="p-inputtext p-component"
+          style="width: 100%"
+        />
+      </div>
+
+      <p-button
+        label="Speichern"
+        icon="pi pi-check"
+        (click)="saveSettings()"
+        [disabled]="!maxAppointments"
+        styleClass="w-full"
+      ></p-button>
+    </div>
+
+  }
+
+</p-drawer>

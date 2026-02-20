@@ -9,11 +9,9 @@ import { Component } from '@angular/core';
 export class BrandsAutoSliderComponent {
 
   brands = [
-    { icon: 'microsoft', name: 'BrandOne' },
-    { icon: 'star', name: 'BrandTwo' },
-    { icon: 'globe', name: 'BrandThree' },
-    { icon: 'apple', name: 'BrandFour' },
-    { icon: 'google', name: 'BrandFive' }
+    { icon: 'bolt', name: 'Apex' },
+    { icon: 'star', name: '4PropTrader' },
+    { icon: 'globe', name: 'NextPropTrader' },
   ];
 
 

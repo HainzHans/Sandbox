@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 import {PrimeTemplate} from 'primeng/api';
 import {Button} from 'primeng/button';
@@ -7,6 +7,12 @@ import {FormsModule} from '@angular/forms';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {KingSizeButton} from '../../../components/buttons/king-size-button/king-size-button';
+import {AppointmentCardComponent} from '../../../components/appointment-card-component/appointment-card-component';
+import {AppointmentSlot} from '../../../models/appointment-slot.model';
+import {AppointmentSlotsService} from '../../../services/apointment_slots/appointment-slots-service';
+import {BookedAppointmentService} from '../../../services/booked_appointments/booked-appointment-service';
+import {BookedAppointment} from '../../../models/booked-appointment.model';
+import {single} from 'rxjs';
 
 @Component({
   selector: 'app-appointment-form-section',
@@ -22,25 +28,57 @@ import {KingSizeButton} from '../../../components/buttons/king-size-button/king-
     FormsModule,
     DatePicker,
     DatePipe,
-    KingSizeButton
+    KingSizeButton,
+    AppointmentCardComponent
   ],
   templateUrl: './appointment-form-section.html',
   styleUrl: './appointment-form-section.css',
 })
-export class AppointmentFormSection {
+export class AppointmentFormSection implements OnInit{
   activeStep = 1;
+
+  isBooked = signal<boolean>(false)
 
   customerName: string = '';
   customerPhone: string = '';
   customerEmail: string = ''
 
-  today: Date = new Date();
-  selectedDate: Date | null = null;
-  selectedTime: string | null = null;
+  appointmentSlots= signal<AppointmentSlot[]>([])
+
+  selectedAppointmentSlot!: AppointmentSlot;
+
 
   // Regex für Validierung
   private emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private phoneRegex = /^[0-9+\-\s()]{6,}$/;
+
+  constructor(private appointmentSlotsService: AppointmentSlotsService,
+              private bookedAppointmentService: BookedAppointmentService,) {
+  }
+
+  ngOnInit() {
+    this.appointmentSlotsService.getFreeSlots().then(slots => {
+      this.appointmentSlots.set(slots)
+    })
+  }
+
+
+  async createBookingAppointment() {
+
+    if (!this.selectedAppointmentSlot.id || !this.customerName || !this.customerPhone || !this.customerEmail) return;
+    const bookingAppointment: BookedAppointment = {
+      name: this.customerName,
+      telephone: this.customerPhone,
+      email: this.customerEmail,
+      slot_id: this.selectedAppointmentSlot.id
+    }
+
+    await this.bookedAppointmentService.create(bookingAppointment).then(() => {
+      this.isBooked.set(true)
+    })
+  }
+
+
 
   // Getter: Ist Step 1 gültig?
   get isStep1Valid(): boolean {
@@ -52,22 +90,15 @@ export class AppointmentFormSection {
   }
 
 
-
-  availableTimes = [
-    { label: '09:00', value: '09:00' },
-    { label: '10:00', value: '10:00' },
-    { label: '11:00', value: '11:00' },
-    { label: '12:00', value: '12:00' },
-    { label: '13:00', value: '13:00' },
-    { label: '14:00', value: '14:00' },
-    { label: '15:00', value: '15:00' },
-    { label: '16:00', value: '16:00' }
-  ];
-
   get isStep2Valid(): boolean {
-    return !!this.selectedDate && !!this.selectedTime;
+    return !!this.selectedAppointmentSlot;
   }
 
+
+
+  selectAppointment(appointment: AppointmentSlot) {
+    this.selectedAppointmentSlot = appointment;
+  }
 
 
 }

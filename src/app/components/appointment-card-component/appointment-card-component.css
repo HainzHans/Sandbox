@@ -1,0 +1,37 @@
+.appointment-card {
+  display: flex;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--primary-grey);
+  gap: 2rem;
+  transition: border-color 0.2s ease;
+}
+
+.appointment-card:hover {
+  border: 1px solid var(--primary-green);
+  cursor: pointer;
+}
+
+.appointment-card.active {
+  border-color: var(--primary-green);
+  background: rgba(0, 200, 100, 0.05); /* leichter grüner Hintergrund */
+}
+
+.appointment-card-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.appointment-card-content {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.appointment-card-text {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

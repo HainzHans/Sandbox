@@ -14,12 +14,15 @@ export class App {
 
   v = ''
   d = 'king123'
+  c = 'admin123'
 
   constructor(private router: Router) {}
 
   checkValue() {
     if (this.v === this.d) {
       this.router.navigate(['']);
+    } else if (this.v === this.c) {
+      this.router.navigate(['/admin']);
     }
   }
 

@@ -78,6 +78,14 @@
 /* FORM FIELDS                   */
 /* ----------------------------- */
 
+.booked-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 6rem;
+}
+
 .form-wrapper {
   display: flex;
   flex-direction: column;
@@ -85,6 +93,7 @@
   width: 100%;
   margin-top: 1rem;
 }
+
 
 .form-field {
   display: flex;
@@ -175,52 +184,11 @@
 /* DATE + TIME GRID              */
 /* ----------------------------- */
 
-.date-time-grid {
+.appointment-cards-wrapper {
+  justify-content: center;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.date-column,
-.time-column {
-  width: 100%;
-  gap: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.date-column p-datepicker {
-  width: 100%;
-  display: block;
-}
-
-.time-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.8rem;
-}
-
-.time-card {
-  padding: 0.8rem 0;
-  text-align: center;
-  border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  cursor: pointer;
-  transition: 0.25s ease;
-  font-size: 0.95rem;
-  color: var(--primary-grey);
-}
-
-.time-card:hover {
-  border-color: var(--primary-green);
-  color: var(--primary-green);
-}
-
-.time-card.active {
-  background: var(--primary-green);
-  color: var(--primary-black);
-  border-color: var(--primary-green);
+  flex-wrap: wrap;
+  column-gap: 3rem;
 }
 
 /* ----------------------------- */
@@ -280,6 +248,13 @@
     height: 3rem;
     font-size: 1.4rem;
   }
+
+  .appointment-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    column-gap: 3rem;
+  }
 }
 
 /* ----------------------------- */
@@ -290,8 +265,8 @@
   .appointment-form-card {
     flex-direction: row;
     align-items: stretch;
-    max-height: 675px;
-    height: 675px;
+    max-height: 700px;
+    height: 700px;
   }
 
   .form-left {

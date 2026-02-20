@@ -1,0 +1,17 @@
+<app-drawer-component
+  [visible]="isVisible"
+  [settingsDrawer]="settingsDrawer"
+  [maxAppointments]="maxAppointments()"
+  [appointmentDrawer]="appointmentDrawer"
+  (closed)="isVisible = false"
+  (savedAppointmentSlot)="saveAppointment($event)"
+  (savedSettings)="saveSettings($event)"
+></app-drawer-component>
+<app-admin-header-section
+  (openDrawer)="isVisible = true; settingsDrawer = true; appointmentDrawer = false"
+></app-admin-header-section>
+<app-admin-appointment-section
+  (openDrawer)="isVisible = true; settingsDrawer = false; appointmentDrawer = true"
+  [refresh]="refresh()"
+></app-admin-appointment-section>
+

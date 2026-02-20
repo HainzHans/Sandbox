@@ -4,6 +4,9 @@
 @import 'styles/base/_font.css';
 @import 'styles/layout/_container.css';
 
+
+
+
 :root {
   --primary-green: #2ecc71;
   --primary-black: black;
@@ -17,6 +20,25 @@
   --app-black: #141414;
   --app-secondary-black: #24282e;
 }
+:root {
+  /* deine neue Primary-Farbe */
+  --p-primary-50:  var(--primary-green);
+  --p-primary-100: var(--primary-green);
+  --p-primary-200: var(--primary-green);
+  --p-primary-300: var(--primary-green);
+  --p-primary-400: var(--primary-green);
+  --p-primary-500: var(--primary-green); /* wichtigste */
+  --p-primary-600: var(--primary-green);
+  --p-primary-700: var(--primary-green);
+  --p-primary-800: var(--primary-green);
+  --p-primary-900: var(--primary-green);
+
+  /* abgeleitete Tokens */
+  --p-primary-color: var(--p-primary-500);
+  --p-primary-contrast-color: #ffffff;
+}
+
+
 
 body {
   font-family: 'Inter', sans-serif;

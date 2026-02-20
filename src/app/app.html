@@ -1,8 +1,8 @@
-@if (v === d) {
+@if (v === d || v === c) {
   <router-outlet></router-outlet>
 }
 
-@if (v !== d) {
+@if (v !== d && v !== c) {
   <div style="padding: 5rem; color: black">
     <input
       pInputText
