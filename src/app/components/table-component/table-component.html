@@ -4,6 +4,11 @@
   [rows]="10"
   [rowsPerPageOptions]="[10]"
 >
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <h6>{{ tableTitle() }}</h6>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="id">
@@ -45,12 +50,12 @@
 
   <ng-template pTemplate="body" let-row>
     <tr>
-      <td>{{ row.id }}</td>
-      <td>{{ row.name }}</td>
-      <td>{{ row.telephone }}</td>
-      <td>{{ row.email }}</td>
-      <td>{{ row.appointmentSlot?.date | date:'dd.MM.yyyy' }}</td>
-      <td>{{ row.appointmentSlot?.time.slice(0,5) }}</td>
+      <td class="grey-text">{{ row.id }}</td>
+      <td class="grey-text">{{ row.name }}</td>
+      <td class="grey-text">{{ row.telephone }}</td>
+      <td class="grey-text">{{ row.email }}</td>
+      <td class="grey-text">{{ row.appointmentSlot?.date | date:'dd.MM.yyyy' }}</td>
+      <td class="grey-text">{{ row.appointmentSlot?.time.slice(0,5) }}</td>
 
       <td>
         <app-small-chip-component

@@ -13,6 +13,7 @@ export class IconButtonComponent {
 
   severity = input<ButtonSeverity>('primary');
   icon = input<string>('');
+  isText = input<boolean>(true);
 
   btnClicked = output<void>();
 

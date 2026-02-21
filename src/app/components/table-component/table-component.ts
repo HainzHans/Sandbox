@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, Input} from '@angular/core';
 import {BookedAppointment} from '../../models/frontend/booked-appointment.model';
 import {TableModule} from 'primeng/table';
 import {SmallChipComponent} from '../chips/small-chip-component/small-chip-component';
@@ -18,6 +18,7 @@ import {DatePipe} from '@angular/common';
 export class TableComponent {
 
   @Input() bookedAppointments: BookedAppointment[] = [];
+  tableTitle = input<string>('');
 
   getStatus(row: BookedAppointment): ChipStatus {
     if (!row.appointmentSlot) return '';

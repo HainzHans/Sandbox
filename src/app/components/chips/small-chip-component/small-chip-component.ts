@@ -1,9 +1,12 @@
 import {Component, input} from '@angular/core';
 import {ChipStatus} from '../../../models/types/chip-status.type';
+import {Chip} from 'primeng/chip';
 
 @Component({
   selector: 'app-small-chip-component',
-  imports: [],
+  imports: [
+    Chip
+  ],
   templateUrl: './small-chip-component.html',
   styleUrl: './small-chip-component.css',
 })

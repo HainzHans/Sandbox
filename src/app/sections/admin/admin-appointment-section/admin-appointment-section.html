@@ -1,25 +1,31 @@
 <p-confirmDialog></p-confirmDialog>
 
-<section class="admin-appointment-section">
+<section>
   <div class="big-container">
-    <div>
-      <app-action-button-component
-        (btnClicked)="toggleDrawer()"
-      ></app-action-button-component>
+    <div class="admin-header-wrapper">
+
     </div>
-    <div class="admin-appointment-cards">
-      <h6 style="flex: 3">Alle Termine</h6>
-      <h6 style="flex: 1">Geplante Termine</h6>
-    </div>
+
     <div class="admin-appointment-wrapper">
       <div class="big-table-wrapper">
         <app-table-component
           class="big-table"
+          [tableTitle]="'Alle Termine'"
           [bookedAppointments]="bookedAppointments()"
         ></app-table-component>
       </div>
 
       <div class="small-table-wrapper">
+        <div class="small-table-header">
+          <h6>Geplante Termine</h6>
+          <app-icon-button-component
+            [severity]="'primary'"
+            [icon]="'plus'"
+            [isText]="false"
+            (btnClicked)="toggleDrawer()"
+          ></app-icon-button-component>
+        </div>
+
         @for (appointment of appointmentSlots(); track appointment.id) {
           <app-admin-appointment-slot-card-component
             [appointmentSlot]="appointment"

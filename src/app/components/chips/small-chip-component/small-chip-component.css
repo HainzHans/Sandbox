@@ -1,23 +1,23 @@
 .status-chip {
   display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 1;
   white-space: nowrap;
 }
 
 /* Grün – Bestätigt */
 .status-confirmed {
-  background: var(--primary-green);
-  color: var(--primary-black);
+  background: color-mix(in srgb, var(--primary-green) 20%, transparent);
+  color: var(--primary-grey);
   border: 1px solid var(--primary-green);
 }
 
 /* Orange – Offen */
 .status-open {
-  background: orange;
-  color: var(--primary-black);
+  background: color-mix(in srgb, orange 20%, transparent);
+  color: var(--primary-grey);
   border: 1px solid orange;
 }

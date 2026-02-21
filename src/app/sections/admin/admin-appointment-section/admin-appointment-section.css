@@ -1,3 +1,8 @@
+.admin-header-wrapper {
+  display: flex;
+  padding: 2rem;
+}
+
 .admin-appointment-wrapper {
   display: flex;
   gap: 1rem;
@@ -32,4 +37,10 @@
   gap: 0.6rem;
 }
 
+.small-table-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
 

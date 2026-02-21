@@ -14,6 +14,7 @@ import {
 import {SmallChipComponent} from '../../../components/chips/small-chip-component/small-chip-component';
 import {ChipStatus} from '../../../models/types/chip-status.type';
 import {TableComponent} from '../../../components/table-component/table-component';
+import {IconButtonComponent} from '../../../components/buttons/icon-button-component/icon-button-component';
 
 @Component({
   selector: 'app-admin-appointment-section',
@@ -24,7 +25,8 @@ import {TableComponent} from '../../../components/table-component/table-componen
     AdminAppointmentSlotCardComponent,
     SmallChipComponent,
     ConfirmDialog,
-    TableComponent
+    TableComponent,
+    IconButtonComponent
   ],
   templateUrl: './admin-appointment-section.html',
   styleUrl: './admin-appointment-section.css',
