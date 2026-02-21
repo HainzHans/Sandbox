@@ -1,9 +1,13 @@
 <p-toolbar class="admin-header">
   <ng-template #start>
-    <img src="assets/images/logo_black.png" alt="Logo" class="header-logo" (click)="navigateHome()"/>
+    <app-king-size-logo-component></app-king-size-logo-component>
   </ng-template>
 
   <ng-template #end>
-    <p-button icon="pi pi-cog"  [outlined]="true" (click)="openSettings()"/>
+    <app-icon-button-component
+      [icon]="'cog'"
+      [severity]="'contrast'"
+      (btnClicked)="openSettings()"
+    ></app-icon-button-component>
   </ng-template>
 </p-toolbar>

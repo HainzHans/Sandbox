@@ -3,14 +3,3 @@
   padding: 0.5rem 2rem;
 }
 
-.header-logo {
-  width: 70px;        /* oder 48px, je nach Look */
-  height: 70px;       /* quadratisch */
-  object-fit: cover;  /* falls das Bild nicht exakt quadratisch ist */
-  cursor: pointer;
-}
-
-.btn-icon {
-  color: var(--primary-green);
-}
-

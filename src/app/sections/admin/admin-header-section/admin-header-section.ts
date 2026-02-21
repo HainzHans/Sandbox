@@ -1,14 +1,16 @@
 import {Component, output} from '@angular/core';
 import {Toolbar} from 'primeng/toolbar';
-import {Button} from 'primeng/button';
-import {AdminPage} from '../../../pages/admin-page/admin-page';
-import {Router} from '@angular/router';
+import {
+  IconButtonComponent
+} from '../../../components/buttons/icon-button-component/icon-button-component';
+import {KingSizeLogoComponent} from '../../../components/king-size-logo-component/king-size-logo-component';
 
 @Component({
   selector: 'app-admin-header-section',
   imports: [
     Toolbar,
-    Button
+    IconButtonComponent,
+    KingSizeLogoComponent
   ],
   templateUrl: './admin-header-section.html',
   styleUrl: './admin-header-section.css',
@@ -17,15 +19,8 @@ export class AdminHeaderSection {
 
   openDrawer = output<void>();
 
-  constructor(private router: Router) {
-  }
-
   openSettings() {
     this.openDrawer.emit();
-  }
-
-  navigateHome() {
-    this.router.navigate([''])
   }
 
 }

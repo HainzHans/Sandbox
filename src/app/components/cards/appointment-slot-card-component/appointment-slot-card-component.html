@@ -1,7 +1,7 @@
 <div
   class="appointment-card"
   [class.active]="isSelected()"
-  (click)="selectAppointment()"
+  (click)="selectAppointmentSlot()"
 >
   <div class="appointment-card-checkbox">
     <p-checkbox
@@ -14,12 +14,13 @@
   <div class="appointment-card-content">
     <div class="appointment-card-text">
       <i class="pi pi-calendar"></i>
-      <span class="grey-text">{{ appointment()?.date | date:'dd.MM.yyyy'}}</span>
+      <span class="grey-text">{{ appointmentSlot()?.date | date:'dd.MM.yyyy'}}</span>
     </div>
 
     <div class="appointment-card-text">
       <i class="pi pi-clock"></i>
-      <span class="grey-text">{{ appointment()?.time }} Uhr</span>
+      <span class="grey-text">{{ appointmentSlot()?.time }} Uhr</span>
     </div>
   </div>
+
 </div>

@@ -1,0 +1,6 @@
+<span class="status-chip"
+      [class.status-confirmed]="status() === 'Abgeschlossen'"
+      [class.status-open]="status() === 'Offen'"
+>
+  {{ status() }}
+</span>

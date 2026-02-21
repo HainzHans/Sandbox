@@ -1,0 +1,23 @@
+<div class="mini-card">
+  <div class="date-row">
+    <div class="left-wrapper">
+      <div class="text-wrapper">
+        <i class="pi pi-calendar"></i>
+        <span class="grey-text">{{ appointmentSlot()?.date | date:'dd.MM.yyyy' }}</span>
+      </div>
+      <div class="text-wrapper">
+        <i class="pi pi-clock"></i>
+        <span class="grey-text">{{ appointmentSlot()?.time?.slice(0,5) }}Uhr</span>
+      </div>
+    </div>
+
+      <app-icon-button-component
+        [icon]="'trash'"
+        [severity]="'danger'"
+        (btnClicked)="confirmDelete(appointmentSlot())"
+      ></app-icon-button-component>
+
+  </div>
+
+
+</div>

@@ -1,21 +1,30 @@
-import {Component, input, OnChanges, OnInit, output, signal, SimpleChanges} from '@angular/core';
+import {Component, input, OnChanges, OnInit, output, signal} from '@angular/core';
 import {TableModule} from 'primeng/table';
-import {Button} from 'primeng/button';
 import {AppointmentSlot} from '../../../models/appointment-slot.model';
 import {AppointmentSlotsService} from '../../../services/apointment_slots/appointment-slots-service';
 import {DatePipe} from '@angular/common';
-import {BookedAppointment} from '../../../models/booked-appointment.model';
+import {BookedAppointment} from '../../../models/frontend/booked-appointment.model';
 import {BookedAppointmentService} from '../../../services/booked_appointments/booked-appointment-service';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import {ActionButtonComponent} from '../../../components/buttons/action-button-component/action-button-component';
+import {
+  AdminAppointmentSlotCardComponent
+} from '../../../components/cards/admin-appointment-slot-card-component/admin-appointment-slot-card-component';
+import {SmallChipComponent} from '../../../components/chips/small-chip-component/small-chip-component';
+import {ChipStatus} from '../../../models/types/chip-status.type';
+import {TableComponent} from '../../../components/table-component/table-component';
 
 @Component({
   selector: 'app-admin-appointment-section',
   imports: [
     TableModule,
-    Button,
     DatePipe,
-    ConfirmDialog
+    ActionButtonComponent,
+    AdminAppointmentSlotCardComponent,
+    SmallChipComponent,
+    ConfirmDialog,
+    TableComponent
   ],
   templateUrl: './admin-appointment-section.html',
   styleUrl: './admin-appointment-section.css',
@@ -59,11 +68,11 @@ export class AdminAppointmentSection implements OnInit, OnChanges{
     })
   }
 
-  getStatus(row: any): string {
-    if (!row.appointments_slots) return 'Unbekannt';
+  getStatus(row: BookedAppointment): ChipStatus {
+    if (!row.appointmentSlot) return '';
 
-    const date = row.appointments_slots.date;
-    const time = row.appointments_slots.time;
+    const date = row.appointmentSlot.date;
+    const time = row.appointmentSlot.time;
 
     const appointmentDateTime = new Date(`${date}T${time}`);
     const now = new Date();
@@ -73,7 +82,6 @@ export class AdminAppointmentSection implements OnInit, OnChanges{
 
 
   confirmDelete(appointment: AppointmentSlot) {
-
 
     this.confirmationService.confirm({
       message: 'Möchtest du diesen Termin wirklich löschen?',

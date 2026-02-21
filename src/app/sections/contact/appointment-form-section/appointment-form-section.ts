@@ -7,11 +7,11 @@ import {FormsModule} from '@angular/forms';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {KingSizeButton} from '../../../components/buttons/king-size-button/king-size-button';
-import {AppointmentCardComponent} from '../../../components/appointment-card-component/appointment-card-component';
+import {AppointmentSlotCardComponent} from '../../../components/cards/appointment-slot-card-component/appointment-slot-card-component';
 import {AppointmentSlot} from '../../../models/appointment-slot.model';
 import {AppointmentSlotsService} from '../../../services/apointment_slots/appointment-slots-service';
 import {BookedAppointmentService} from '../../../services/booked_appointments/booked-appointment-service';
-import {BookedAppointment} from '../../../models/booked-appointment.model';
+import {BookedAppointment} from '../../../models/frontend/booked-appointment.model';
 
 @Component({
   selector: 'app-appointment-form-section',
@@ -26,7 +26,7 @@ import {BookedAppointment} from '../../../models/booked-appointment.model';
     InputText,
     FormsModule,
     DatePipe,
-    AppointmentCardComponent
+    AppointmentSlotCardComponent
   ],
   templateUrl: './appointment-form-section.html',
   styleUrl: './appointment-form-section.css',
@@ -64,7 +64,8 @@ export class AppointmentFormSection implements OnInit{
       name: this.customerName,
       telephone: this.customerPhone,
       email: this.customerEmail,
-      slot_id: this.selectedAppointmentSlot.id
+      slotId: this.selectedAppointmentSlot.id,
+      appointmentSlot: this.selectedAppointmentSlot
     }
 
     await this.bookedAppointmentService.create(bookingAppointment).then(() => {

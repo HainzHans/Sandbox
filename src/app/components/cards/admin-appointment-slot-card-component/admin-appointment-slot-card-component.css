@@ -1,0 +1,28 @@
+.mini-card {
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: 1px solid var(--primary-grey);
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.left-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.text-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem
+}

@@ -73,11 +73,11 @@
                 <h6>Wähle einen freien Termin</h6>
                 <div class="appointment-cards-wrapper">
                   @for (appointment of appointmentSlots(); track appointment) {
-                    <app-appointment-card-component
-                      [appointment]="appointment"
+                    <app-appointment-slot-card-component
+                      [appointmentSlot]="appointment"
                       [isSelected]="selectedAppointmentSlot === appointment"
                       (onSelect)="selectAppointment($event)"
-                    ></app-appointment-card-component>
+                    ></app-appointment-slot-card-component>
                   }
                 </div>
 

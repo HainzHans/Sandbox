@@ -14,7 +14,6 @@
   justify-content: flex-end;
 }
 
-
 .big-table-wrapper {
   display: flex;
   flex: 3;
@@ -25,35 +24,6 @@
   width: 100%;
 }
 
-.action-cell {
-  display: flex;
-  gap: 1rem;
-}
-
-.status-chip {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* Grün – Bestätigt */
-.status-confirmed {
-  background: var(--primary-green);
-  color: var(--primary-black);
-  border: 1px solid var(--primary-green);
-}
-
-/* Orange – Offen */
-.status-open {
-  background: orange;
-  color: var(--primary-black);
-  border: 1px solid orange;
-}
-
 
 .small-table-wrapper {
   display: flex;
@@ -62,54 +32,4 @@
   gap: 0.6rem;
 }
 
-
-
-/* Mini Card */
-.mini-card {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-
-  /* Hintergrund – stärker, klarer */
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-
-  /* Doppelte Border für Premium-Look */
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  outline: 1px solid rgba(0, 0, 0, 0.4);
-
-  /* Tiefer, weicher Schatten */
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
-
-  /* Leichter innerer Glow für mehr Tiefe */
-  background-image: radial-gradient(
-    circle at top,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0) 60%
-  );
-}
-
-/* Date Row */
-.date-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
-  font-weight: 500;
-}
-
-/* Action Row */
-.action-row {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.3rem;
-}
-
-.mini-card i {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
 

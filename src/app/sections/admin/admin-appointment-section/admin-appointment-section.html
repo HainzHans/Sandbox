@@ -3,10 +3,9 @@
 <section class="admin-appointment-section">
   <div class="big-container">
     <div>
-      <p-button (onClick)="toggleDrawer()">
-        <i class="pi pi-plus btn-icon"></i>
-        <span>Neuer Termin</span>
-      </p-button>
+      <app-action-button-component
+        (btnClicked)="toggleDrawer()"
+      ></app-action-button-component>
     </div>
     <div class="admin-appointment-cards">
       <h6 style="flex: 3">Alle Termine</h6>
@@ -14,105 +13,20 @@
     </div>
     <div class="admin-appointment-wrapper">
       <div class="big-table-wrapper">
-        <p-table
-          [value]="bookedAppointments()"
+        <app-table-component
           class="big-table"
-          [paginator]="true"
-          [rows]="10"
-          [rowsPerPageOptions]="[10]"
-        >
-          <ng-template pTemplate="header">
-            <tr>
-
-              <th pSortableColumn="id">
-                ID
-                <p-sortIcon field="id"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="name">
-                Name
-                <p-sortIcon field="name"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="phone">
-                Telefon
-                <p-sortIcon field="phone"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="email">
-                Email
-                <p-sortIcon field="email"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="date">
-                Datum
-                <p-sortIcon field="date"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="time">
-                Uhrzeit
-                <p-sortIcon field="time"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="status">
-                Status
-                <p-sortIcon field="status"></p-sortIcon>
-              </th>
-            </tr>
-          </ng-template>
-
-          <ng-template pTemplate="body" let-row>
-            <tr>
-              <td>{{ row.id }}</td>
-              <td>{{ row.name }}</td>
-              <td>{{ row.telephone }}</td>
-              <td>{{ row.email }}</td>
-              <td>{{ row.appointments_slots?.date | date:'dd.MM.yyyy' }}</td>
-              <td>{{ row.appointments_slots?.time.slice(0,5) }}</td>
-
-              <td>
-               <span
-                 class="status-chip"
-                 [class.status-confirmed]="getStatus(row) === 'Abgeschlossen'"
-                 [class.status-open]="getStatus(row) === 'Offen'"
-               >
-                {{ getStatus(row) }}
-               </span>
-              </td>
-
-            </tr>
-          </ng-template>
-        </p-table>
-
+          [bookedAppointments]="bookedAppointments()"
+        ></app-table-component>
       </div>
 
       <div class="small-table-wrapper">
-
-        @for (appointment of appointmentSlots(); track appointment) {
-          <div class="mini-card">
-            <div class="date-row">
-              <div style="display: flex; align-items: center; gap: 1rem">
-                <i class="pi pi-calendar"></i>
-                <span>{{ appointment.date | date:'dd.MM.yyyy' }} – {{ appointment.time.slice(0,5) }}Uhr</span>
-              </div>
-
-              <div class="action-row">
-                <p-button
-                  icon="pi pi-trash"
-                  severity="danger"
-                  styleClass="p-button-sm p-button-text"
-                  (click)="confirmDelete(appointment)"
-                ></p-button>
-              </div>
-            </div>
-
-
-          </div>
+        @for (appointment of appointmentSlots(); track appointment.id) {
+          <app-admin-appointment-slot-card-component
+            [appointmentSlot]="appointment"
+            (btnClicked)="confirmDelete(appointment)"
+          ></app-admin-appointment-slot-card-component>
         }
-
       </div>
-
-
 
     </div>
   </div>
