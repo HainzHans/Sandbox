@@ -2,39 +2,42 @@
 
 <section>
   <div class="big-container">
-    <div class="admin-header-wrapper">
+    <div class="admin-container">
+      <div class="admin-header-wrapper">
 
-    </div>
-
-    <div class="admin-appointment-wrapper">
-      <div class="big-table-wrapper">
-        <app-table-component
-          class="big-table"
-          [tableTitle]="'Alle Termine'"
-          [bookedAppointments]="bookedAppointments()"
-        ></app-table-component>
       </div>
 
-      <div class="small-table-wrapper">
-        <div class="small-table-header">
-          <h6>Geplante Termine</h6>
-          <app-icon-button-component
-            [severity]="'primary'"
-            [icon]="'plus'"
-            [isText]="false"
-            (btnClicked)="toggleDrawer()"
-          ></app-icon-button-component>
+      <div class="admin-appointment-wrapper">
+        <div class="big-table-wrapper">
+          <app-table-component
+            class="big-table"
+            [tableTitle]="'Alle Termine'"
+            [bookedAppointments]="bookedAppointments()"
+          ></app-table-component>
         </div>
 
-        @for (appointment of appointmentSlots(); track appointment.id) {
-          <app-admin-appointment-slot-card-component
-            [appointmentSlot]="appointment"
-            (btnClicked)="confirmDelete(appointment)"
-          ></app-admin-appointment-slot-card-component>
-        }
-      </div>
+        <div class="small-table-wrapper">
+          <div class="small-table-header">
+            <h6>Geplante Termine</h6>
+            <app-icon-button-component
+              [severity]="'primary'"
+              [icon]="'plus'"
+              [isText]="false"
+              (btnClicked)="toggleDrawer()"
+            ></app-icon-button-component>
+          </div>
 
+          @for (appointment of appointmentSlots(); track appointment.id) {
+            <app-admin-appointment-slot-card-component
+              [appointmentSlot]="appointment"
+              (btnClicked)="confirmDelete(appointment)"
+            ></app-admin-appointment-slot-card-component>
+          }
+        </div>
+
+      </div>
     </div>
+
   </div>
 </section>
 
