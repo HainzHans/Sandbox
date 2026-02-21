@@ -1,4 +1,4 @@
-<section class="video-hero-container" [style.height]="height()">
+<section class="hero-section" [style.height]="height()">
   <video
     autoplay
     muted
@@ -11,10 +11,9 @@
   <div class="container">
     <div class="hero-wrapper">
       <div class="hero-text">
-        <div class="hero-badge">
-          <div class="badge-dot"></div>
-          <span class="white-text">{{introText()}}</span>
-        </div>
+        <app-main-chip-component
+          [description]="introText()"
+        ></app-main-chip-component>
         <h1 class="white-text text-shadow">
           {{ titleLine1() }}
           <br>

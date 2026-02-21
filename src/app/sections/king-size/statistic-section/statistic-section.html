@@ -1,49 +1,20 @@
 <section class="statistic-container">
   <div class="container">
     <div class="statistic-wrapper">
-      <div class="statistic-card-wrapper statistic-card-wrapper-border">
-        <div class="statistic-card">
-          <h5 class="statistic-card-content">
-            200+
-          </h5>
-          <span class="statistic-card-footer">
-            Zufriedene Kunden
-          </span>
-        </div>
-      </div>
 
-      <div class="statistic-card-wrapper statistic-card-wrapper-border">
-        <div class="statistic-card">
-          <h5 class="statistic-card-content">
-            6 Jahre
-          </h5>
-          <span class="statistic-card-footer">
-            Erfahrung
-          </span>
+      @for (stat of stats; track stat) {
+        <div class="statistic-card-wrapper statistic-card-wrapper-border">
+          <div class="statistic-card">
+            <h5>
+              {{ stat.value }}
+            </h5>
+            <span>
+              {{ stat.description }}
+            </span>
+          </div>
         </div>
-      </div>
+      }
 
-      <div class="statistic-card-wrapper statistic-card-wrapper-border ">
-        <div class="statistic-card">
-          <h5 class="statistic-card-content">
-            1000+
-          </h5>
-          <span class="statistic-card-footer">
-            Ticks in der Woche
-          </span>
-        </div>
-      </div>
-
-      <div class="statistic-card-wrapper">
-        <div class="statistic-card">
-          <h5 class="statistic-card-content">
-            24/7
-          </h5>
-          <span class="statistic-card-footer">
-            Erreichbarkeit
-          </span>
-        </div>
-      </div>
     </div>
   </div>
 </section>

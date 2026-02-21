@@ -12,7 +12,6 @@ import {AppointmentSlot} from '../../../models/appointment-slot.model';
 import {AppointmentSlotsService} from '../../../services/apointment_slots/appointment-slots-service';
 import {BookedAppointmentService} from '../../../services/booked_appointments/booked-appointment-service';
 import {BookedAppointment} from '../../../models/booked-appointment.model';
-import {single} from 'rxjs';
 
 @Component({
   selector: 'app-appointment-form-section',
@@ -26,9 +25,7 @@ import {single} from 'rxjs';
     StepPanel,
     InputText,
     FormsModule,
-    DatePicker,
     DatePipe,
-    KingSizeButton,
     AppointmentCardComponent
   ],
   templateUrl: './appointment-form-section.html',
@@ -38,19 +35,17 @@ export class AppointmentFormSection implements OnInit{
   activeStep = 1;
 
   isBooked = signal<boolean>(false)
+  appointmentSlots= signal<AppointmentSlot[]>([])
 
   customerName: string = '';
   customerPhone: string = '';
   customerEmail: string = ''
 
-  appointmentSlots= signal<AppointmentSlot[]>([])
-
   selectedAppointmentSlot!: AppointmentSlot;
-
-
   // Regex für Validierung
   private emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private phoneRegex = /^[0-9+\-\s()]{6,}$/;
+
 
   constructor(private appointmentSlotsService: AppointmentSlotsService,
               private bookedAppointmentService: BookedAppointmentService,) {
@@ -64,7 +59,6 @@ export class AppointmentFormSection implements OnInit{
 
 
   async createBookingAppointment() {
-
     if (!this.selectedAppointmentSlot.id || !this.customerName || !this.customerPhone || !this.customerEmail) return;
     const bookingAppointment: BookedAppointment = {
       name: this.customerName,
@@ -80,7 +74,6 @@ export class AppointmentFormSection implements OnInit{
 
 
 
-  // Getter: Ist Step 1 gültig?
   get isStep1Valid(): boolean {
     return (
       this.customerName.trim().length > 1 &&
@@ -93,8 +86,6 @@ export class AppointmentFormSection implements OnInit{
   get isStep2Valid(): boolean {
     return !!this.selectedAppointmentSlot;
   }
-
-
 
   selectAppointment(appointment: AppointmentSlot) {
     this.selectedAppointmentSlot = appointment;

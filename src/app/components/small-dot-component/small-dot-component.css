@@ -1,0 +1,8 @@
+.badge-dot {
+  background-color: var(--primary-green);
+  border-radius: 2rem;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  flex: none;
+}

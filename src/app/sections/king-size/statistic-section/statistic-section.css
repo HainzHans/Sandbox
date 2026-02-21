@@ -20,23 +20,15 @@
   border-right: 1px solid var(--primary-green);
 }
 
-
-
 .statistic-card-wrapper {
   flex: 1;
 }
-
-
 
 .statistic-card {
   display: flex;
   flex-direction: column;
   padding: 2rem 0;
   gap: 2rem;
-}
-
-.statistic-card-content {
-
 }
 
 
@@ -54,5 +46,10 @@
   .statistic-card-wrapper-border {
     border-right: 1px solid var(--primary-green);
   }
+
+  .statistic-card-wrapper-border:last-child {
+    border-right: none;
+  }
+
 }
 

@@ -1,16 +1,9 @@
-.footer-container {
+.footer-section {
   background: var(--primary-black);
   border-top: 1px solid var(--primary-grey);
 }
 
-.header-logo {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.footer-wrapper {
+.footer-top-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +26,7 @@
   flex-direction: row;
 }
 
-.footer-bottom {
+.footer-bottom-wrapper {
   display: flex;
   justify-content: space-around;
   padding-top: 2rem;
@@ -41,18 +34,9 @@
   align-items: center;
 }
 
-.badge-dot {
-  background-color: var(--primary-green);
-  border-radius: 2rem;
-  flex: none;
-  width: 7px;
-  height: 7px;
-  flex: none;
-}
-
 
 @media (min-width: 800px) {
-  .footer-wrapper {
+  .footer-top-wrapper {
     flex-direction: row;
   }
 }

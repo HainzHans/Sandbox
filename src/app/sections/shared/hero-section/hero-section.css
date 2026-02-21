@@ -1,4 +1,4 @@
-.video-hero-container {
+.hero-section {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -10,13 +10,13 @@
 }
 
 
-.video-hero-container .container {
+.hero-section .container {
   position: relative;
   z-index: 3; /* über Video, Overlay und Gradient */
 }
 
 
-.video-hero-container::before {
+.hero-section::before {
   content: "";
   position: absolute;
   left: 0;
@@ -35,7 +35,7 @@
 
 
 /* OPTIONAL: dunkler Overlay für bessere Lesbarkeit */
-.video-hero-container::after {
+.hero-section::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -72,28 +72,9 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-
 }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.02); /* leicht transparent */
-  padding: 0.5rem 2rem;
-  border-radius: 0.5rem; /* pill shape */
-  backdrop-filter: blur(6px); /* moderner Glass-Effekt */
-  border: 1px solid rgba(255, 255, 255, 0.02);
-}
 
-.badge-dot {
-  background-color: var(--primary-green);
-  border-radius: 2rem;
-  flex: none;
-  width: 7px;
-  height: 7px;
-  flex: none;
-}
 
 .hero-button-wrapper {
   display: inline-flex;

@@ -1,4 +1,4 @@
-.header-container {
+.header-section {
   position: absolute;
   top: 0;
   left: 0;
@@ -7,14 +7,6 @@
   background: transparent;
 }
 
-.header-logo {
-  width: 70px;        /* oder 48px, je nach Look */
-  height: 70px;       /* quadratisch */
-  object-fit: cover;  /* falls das Bild nicht exakt quadratisch ist */
-  cursor: pointer;
-}
-
-
 .header-wrapper {
   padding: 1rem 0;
   display: flex;
@@ -22,31 +14,17 @@
   align-items: center;
 }
 
-.left-header-box {
+.left-header {
   flex: 1;
   display: flex;
   justify-content: flex-start;;
   align-items: center;
 }
 
-.center-header-box {
-  display: none;
-}
-
-.right-header-box {
+.right-header {
   flex: 1;
   justify-content: flex-end;
   align-items: center;
   display: flex;
   gap: 1rem;
-}
-
-@media (min-width: 1024px) {
-  .center-header-box {
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-
 }

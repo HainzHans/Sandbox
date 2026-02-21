@@ -1,16 +1,11 @@
-<section class="header-container">
+<section class="header-section">
   <div class="container">
     <div class="header-wrapper">
-      <div class="left-header-box">
-        <img
-          src="assets/images/logo_black.png"
-          alt="Logo"
-          class="header-logo"
-          (click)="navigateHome()"
-        />
+      <div class="left-header">
+        <app-king-size-logo-component></app-king-size-logo-component>
       </div>
 
-      <div class="right-header-box">
+      <div class="right-header">
         <app-king-size-button
           [target]="'/contact'"
           [btnText]="'Starte jetzt'"

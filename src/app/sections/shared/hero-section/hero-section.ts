@@ -1,10 +1,14 @@
 import {AfterViewInit, Component, input} from '@angular/core';
 import {KingSizeButton} from '../../../components/buttons/king-size-button/king-size-button';
+import {SmallDotComponent} from '../../../components/small-dot-component/small-dot-component';
+import {MainChipComponent} from '../../../components/main-chip-component/main-chip-component';
 
 @Component({
   selector: 'app-hero-section',
   imports: [
-    KingSizeButton
+    KingSizeButton,
+    SmallDotComponent,
+    MainChipComponent
   ],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',

@@ -1,5 +1,7 @@
-.brands-auto-slider-container {
+.brands-auto-slider-section {
   background: var(--primary-black);
+  overflow: hidden;
+  padding-bottom: 10rem;
 }
 
 .brands-title {
@@ -9,12 +11,6 @@
 
 .brands-wrapper {
   overflow: hidden;
-}
-
-.brands-auto-slider-container {
-  background: var(--primary-black);
-  overflow: hidden;
-  padding-bottom: 10rem;
 }
 
 .brands-track {
