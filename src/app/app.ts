@@ -22,7 +22,7 @@ export class App {
     if (this.v === this.d) {
       this.router.navigate(['']);
     } else if (this.v === this.c) {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/app']);
     }
   }
 

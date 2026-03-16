@@ -1,0 +1,223 @@
+<p-toast position="top-right" />
+
+<div class="tasks-page">
+
+  <!-- ── Header ── -->
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Admin · Verwaltung</span>
+      <h1 class="page-title">Tasks</h1>
+    </div>
+    <button class="btn-create" (click)="openCreate()">
+      <i class="pi pi-plus"></i> Neue Aufgabe
+    </button>
+  </div>
+
+  <!-- ── Tabs ── -->
+  <div class="tabs">
+    <button class="tab" [class.tab--active]="activeTab() === 'aktiv'" (click)="activeTab.set('aktiv')">
+      <i class="pi pi-bolt"></i> Aktive Aufgaben
+      <span class="tab-badge">{{ activeTasks.length }}</span>
+    </button>
+    <button class="tab" [class.tab--active]="activeTab() === 'vergangen'" (click)="activeTab.set('vergangen')">
+      <i class="pi pi-history"></i> Vergangene Aufgaben
+      <span class="tab-badge tab-badge--muted">{{ tasks.length - activeTasks.length }}</span>
+    </button>
+  </div>
+
+  <!-- ── Filter Bar ── -->
+  @if (activeTab() === 'vergangen') {
+    <div class="filter-bar">
+      <div class="filter-field">
+        <i class="pi pi-search"></i>
+        <input pInputText [(ngModel)]="searchTitle" placeholder="Titel suchen…" class="filter-input" />
+      </div>
+      <div class="filter-field">
+        <i class="pi pi-calendar"></i>
+        <input pInputText [(ngModel)]="searchDate" placeholder="Datum (z.B. 06.2025)" class="filter-input" />
+      </div>
+      <p-select [(ngModel)]="sortOrder" [options]="sortOptions" optionLabel="label" optionValue="value" styleClass="sort-select" />
+    </div>
+  }
+
+  <!-- ── Empty ── -->
+  @if (displayedTasks.length === 0) {
+    <div class="empty-state">
+      <i class="pi pi-inbox"></i>
+      <span>Keine Aufgaben gefunden</span>
+    </div>
+  }
+
+  <!-- ── Task List ── -->
+  <div class="task-list">
+    @for (task of displayedTasks; track task.id) {
+      <div class="task-row" [class.task-row--open]="task.expanded">
+
+        <!-- Summary (clickable) -->
+        <div class="task-summary" (click)="toggleExpand(task)">
+          <div class="task-thumb">
+            <img [src]="task.imageUrl" [alt]="task.title" />
+            @if (task.status === 'abgelaufen') {
+              <div class="thumb-overlay"><i class="pi pi-lock"></i></div>
+            }
+          </div>
+
+          <div class="task-summary__body">
+            <div class="task-summary__meta">
+              <span class="meta-date"><i class="pi pi-calendar"></i>{{ task.createdAt }}</span>
+              @if (pendingCount(task) > 0) {
+                <span class="meta-pending"><i class="pi pi-circle-fill"></i>{{ pendingCount(task) }} offen</span>
+              }
+            </div>
+            <h3 class="task-title">{{ task.title }}</h3>
+            <p class="task-desc">{{ task.description }}</p>
+          </div>
+
+          <div class="task-summary__end">
+            <span class="sub-count-label"><i class="pi pi-users"></i>{{ submissionLabel(task.submissions.length) }}</span>
+            <i class="pi chevron-icon" [class.pi-chevron-down]="!task.expanded" [class.pi-chevron-up]="task.expanded"></i>
+          </div>
+        </div>
+
+        <!-- ── Inline Submissions ── -->
+        @if (task.expanded) {
+          <div class="submissions-panel">
+            @if (task.submissions.length === 0) {
+              <div class="sub-empty"><i class="pi pi-inbox"></i> Noch keine Einreichungen</div>
+            } @else {
+              <div class="sub-list">
+                @for (sub of task.submissions; track sub.id) {
+                  <div class="sub-row"
+                       [class.sub-row--richtig]="sub.result === 'richtig'"
+                       [class.sub-row--falsch]="sub.result === 'falsch'"
+                       [class.sub-row--star]="sub.isSolutionOfDay"
+                  >
+                    <!-- Col 1: user info -->
+                    <div class="col-user">
+                      <div class="sub-avatar">{{ sub.userAvatar }}</div>
+                      <div class="sub-meta">
+                        <span class="sub-name">
+                          {{ sub.userName }}
+                          @if (sub.isSolutionOfDay) { <i class="pi pi-star-fill star-inline"></i> }
+                        </span>
+                        <span class="sub-time">{{ sub.submittedAt }}</span>
+                        <p-tag [value]="getResultLabel(sub.result)" [severity]="getResultSeverity(sub.result)" />
+                      </div>
+                    </div>
+
+                    <!-- Col 2: notes -->
+                    <div class="col-notes">
+                      @if (sub.userNote) {
+                        <div class="note note--user">
+                          <span class="note__label"><i class="pi pi-comment"></i>Notiz des Users</span>
+                          <p class="note__text">{{ sub.userNote }}</p>
+                        </div>
+                      }
+
+                      <div class="note note--admin" [class.note--editable]="!sub.editingNote" (click)="!sub.editingNote && (sub.editingNote = true)">
+                        <span class="note__label"><i class="pi pi-pencil"></i>Admin-Notiz</span>
+                        @if (sub.editingNote) {
+                          <textarea
+                            pTextarea
+                            [(ngModel)]="sub.adminNote"
+                            rows="2"
+                            class="note__textarea"
+                            placeholder="Notiz für diesen User…"
+                            (click)="$event.stopPropagation()"
+                          ></textarea>
+                          <button class="btn-note-save" (click)="$event.stopPropagation(); saveNote(sub)">
+                            <i class="pi pi-check"></i> Speichern
+                          </button>
+                        } @else {
+                          <p class="note__text" [class.note__text--empty]="!sub.adminNote">
+                            {{ sub.adminNote || 'Klicken zum Hinzufügen…' }}
+                          </p>
+                        }
+                      </div>
+                    </div>
+
+                    <!-- Col 3: image + actions -->
+                    <div class="col-right">
+                      <div class="sub-img-wrap" (click)="openLightbox(sub.imageUrl, sub.userName)" title="Vergrößern">
+                        <img [src]="sub.imageUrl" [alt]="sub.userName" class="sub-thumb" />
+                        <div class="sub-img-hover"><i class="pi pi-search-plus"></i></div>
+                      </div>
+
+                      <div class="action-row">
+                        <button class="btn-mark btn-mark--richtig" [class.active]="sub.result === 'richtig'" (click)="markResult(sub, 'richtig')" title="Richtig">
+                          <i class="pi pi-check-circle"></i> Richtig
+                        </button>
+                        <button class="btn-mark btn-mark--falsch" [class.active]="sub.result === 'falsch'" (click)="markResult(sub, 'falsch')" title="Falsch">
+                          <i class="pi pi-times-circle"></i> Falsch
+                        </button>
+                        <button class="btn-star" [class.btn-star--on]="sub.isSolutionOfDay"
+                                (click)="sub.isSolutionOfDay ? removeSolutionOfDay(sub) : toggleSolutionOfDay(task, sub)"
+                                title="Lösung des Tages">
+                          <i class="pi" [class.pi-star]="!sub.isSolutionOfDay" [class.pi-star-fill]="sub.isSolutionOfDay"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+
+      </div>
+    }
+  </div>
+
+</div>
+
+<!-- ══ Lightbox ══ -->
+@if (lightboxUrl()) {
+  <div class="lightbox-backdrop" (click)="closeLightbox()">
+    <div class="lightbox-box" (click)="$event.stopPropagation()">
+      <div class="lightbox-header">
+        <span>{{ lightboxName() }}</span>
+        <button class="lightbox-close" (click)="closeLightbox()"><i class="pi pi-times"></i></button>
+      </div>
+      <img [src]="lightboxUrl()!" [alt]="lightboxName()" class="lightbox-img" />
+    </div>
+  </div>
+}
+
+<!-- ══ Dialog: Neue Aufgabe ══ -->
+<p-dialog
+  header="Neue Aufgabe erstellen"
+  [visible]="showCreateDialog()"
+  (visibleChange)="showCreateDialog.set($event)"
+  [modal]="true" [draggable]="false"
+  [style]="{ width: '520px' }"
+>
+  <div class="create-form">
+    <div class="form-field">
+      <label>Titel</label>
+      <input pInputText [(ngModel)]="newTitle" placeholder="Titel" class="full-input" />
+    </div>
+    <div class="form-field">
+      <label>Aufgabenbeschreibung</label>
+      <textarea pTextarea [(ngModel)]="newDescription" placeholder="Beschreibe die Aufgabe für die User…" rows="4" class="full-input"></textarea>
+    </div>
+    <div class="form-field">
+      <label>Bild hochladen</label>
+      <label class="upload-zone" [class.upload-zone--filled]="newImagePreview">
+        @if (newImagePreview) {
+          <img [src]="newImagePreview" alt="Vorschau" class="upload-preview" />
+          <span class="upload-change">Bild ändern</span>
+        } @else {
+          <i class="pi pi-image"></i>
+          <span>Klicken zum Hochladen</span>
+          <span class="upload-hint">PNG, JPG, WEBP</span>
+        }
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+      </label>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button class="btn-cancel" (click)="showCreateDialog.set(false)">Abbrechen</button>
+    <button class="btn-save" (click)="createTask()"><i class="pi pi-check"></i> Veröffentlichen</button>
+  </ng-template>
+</p-dialog>

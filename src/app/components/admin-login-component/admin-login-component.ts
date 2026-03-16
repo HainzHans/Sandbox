@@ -37,6 +37,6 @@ export class AdminLoginComponent {
       return;
     }
 
-    await this.router.navigate(['/admin']);
+    await this.router.navigate(['/app']);
   }
 }

@@ -1,0 +1,329 @@
+/* ── Colors ──────────────────────────────────────────────── */
+:host {
+  --lt-color:      #38bdf8;   /* sky-400  – LiveTrading */
+  --lt-soft:       rgba(56, 189, 248, 0.10);
+  --lt-border:     rgba(56, 189, 248, 0.22);
+  --mt-color:      var(--primary-green, #22c55e);  /* Mentoring */
+  --mt-soft:       rgba(34, 197, 94, 0.10);
+  --mt-border:     rgba(34, 197, 94, 0.22);
+}
+
+/* ── Page ────────────────────────────────────────────────── */
+.termine-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--primary-white, #f1f5f9);
+  min-height: 100%;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.page-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary-green, #22c55e);
+  margin-bottom: 4px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+/* ── Two-column layout ───────────────────────────────────── */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Column ──────────────────────────────────────────────── */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--secondary-black, #1a1d27);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+/* ── Column Header ───────────────────────────────────────── */
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.column-header__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.column-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--lt-soft);
+  color: var(--lt-color);
+  flex-shrink: 0;
+
+  i { font-size: 17px; }
+}
+
+.column-icon--mentoring {
+  background: var(--mt-soft);
+  color: var(--mt-color);
+}
+
+.column-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-white, #f1f5f9);
+  line-height: 1.2;
+}
+
+.column-count {
+  display: block;
+  font-size: 11.5px;
+  color: var(--primary-grey, #64748b);
+  margin-top: 1px;
+}
+
+/* ── Add Button ──────────────────────────────────────────── */
+.btn-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 150ms, transform 150ms;
+
+  i { font-size: 12px; }
+
+  &:hover { opacity: 0.85; transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+}
+
+.btn-add--livetrading {
+  background: var(--lt-soft);
+  color: var(--lt-color);
+  border: 1px solid var(--lt-border);
+}
+
+.btn-add--mentoring {
+  background: var(--mt-soft);
+  color: var(--mt-color);
+  border: 1px solid var(--mt-border);
+}
+
+/* ── Appointments List ───────────────────────────────────── */
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px 16px;
+}
+
+/* ── Empty State ─────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 0;
+  color: var(--primary-grey, #475569);
+  font-size: 13px;
+  border: 1px dashed rgba(255,255,255,0.07);
+  border-radius: 10px;
+
+  i { font-size: 18px; }
+}
+
+/* ── Appointment Card ────────────────────────────────────── */
+.appt-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+  transition: background 150ms, border-color 150ms, transform 150ms;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.09);
+    transform: translateX(2px);
+  }
+}
+
+/* Left accent bar */
+.appt-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.appt-card--livetrading .appt-card__accent { background: var(--lt-color); }
+.appt-card--mentoring   .appt-card__accent { background: var(--mt-color); }
+
+/* Body */
+.appt-card__body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  padding-left: 6px;
+}
+
+.appt-card__date,
+.appt-card__time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+
+  i { font-size: 12px; color: var(--primary-grey, #64748b); }
+}
+
+.appt-card__date { font-weight: 600; color: var(--primary-white, #f1f5f9); }
+.appt-card__time { color: var(--primary-grey, #94a3b8); }
+
+/* Actions */
+.appt-card__actions {
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+.appt-card:hover .appt-card__actions { opacity: 1; }
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+
+  i { font-size: 13px; }
+}
+
+.action-btn--edit {
+  color: var(--primary-grey, #64748b);
+
+  &:hover {
+    background: rgba(96, 165, 250, 0.12);
+    color: #60a5fa;
+  }
+}
+
+.action-btn--delete {
+  color: var(--primary-grey, #64748b);
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+  }
+}
+
+/* ── Dialog ──────────────────────────────────────────────── */
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 4px;
+}
+
+.dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  label {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary-grey, #64748b);
+  }
+}
+
+:host ::ng-deep .full-width,
+:host ::ng-deep .full-width .p-datepicker,
+:host ::ng-deep .full-width input {
+  width: 100%;
+}
+
+.btn-cancel {
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--primary-grey, #64748b);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 150ms;
+
+  &:hover { background: rgba(255,255,255,0.05); }
+}
+
+.btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--lt-color);
+  color: #0a0f1a;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 150ms;
+
+  &:hover { opacity: 0.85; }
+
+  &.btn-save--mentoring {
+    background: var(--mt-color);
+    color: #071a0f;
+  }
+}

@@ -1,0 +1,168 @@
+<p-toast position="top-right" />
+<p-confirmDialog />
+
+<div class="termine-page">
+
+  <!-- ── Header ── -->
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Admin · Termine</span>
+      <h1 class="page-title">Termine</h1>
+    </div>
+  </div>
+
+  <!-- ── Two-column layout ── -->
+  <div class="columns">
+
+    <!-- ══ LIVETRADING ══ -->
+    <div class="column">
+      <div class="column-header column-header--livetrading">
+        <div class="column-header__left">
+          <span class="column-icon"><i class="pi pi-chart-line"></i></span>
+          <div>
+            <span class="column-label">LiveTrading</span>
+            <span class="column-count">{{ livetradingAppointments.length }} Termine</span>
+          </div>
+        </div>
+        <button class="btn-add btn-add--livetrading" (click)="openCreate('livetrading')">
+          <i class="pi pi-plus"></i>
+          <span>Hinzufügen</span>
+        </button>
+      </div>
+
+      <div class="appointments-list">
+        @if (livetradingAppointments.length === 0) {
+          <div class="empty-state">
+            <i class="pi pi-calendar-times"></i>
+            <span>Noch keine Termine</span>
+          </div>
+        }
+
+        @for (appt of livetradingAppointments; track appt.id) {
+          <div class="appt-card appt-card--livetrading">
+            <div class="appt-card__accent"></div>
+            <div class="appt-card__body">
+              <div class="appt-card__date">
+                <i class="pi pi-calendar"></i>
+                {{ appt.date }}
+              </div>
+              <div class="appt-card__time">
+                <i class="pi pi-clock"></i>
+                {{ appt.time }} Uhr
+              </div>
+            </div>
+            <div class="appt-card__actions">
+              <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
+                <i class="pi pi-pencil"></i>
+              </button>
+              <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ══ MENTORING ══ -->
+    <div class="column">
+      <div class="column-header column-header--mentoring">
+        <div class="column-header__left">
+          <span class="column-icon column-icon--mentoring"><i class="pi pi-users"></i></span>
+          <div>
+            <span class="column-label">Mentoring</span>
+            <span class="column-count">{{ mentoringAppointments.length }} Termine</span>
+          </div>
+        </div>
+        <button class="btn-add btn-add--mentoring" (click)="openCreate('mentoring')">
+          <i class="pi pi-plus"></i>
+          <span>Hinzufügen</span>
+        </button>
+      </div>
+
+      <div class="appointments-list">
+        @if (mentoringAppointments.length === 0) {
+          <div class="empty-state">
+            <i class="pi pi-calendar-times"></i>
+            <span>Noch keine Termine</span>
+          </div>
+        }
+
+        @for (appt of mentoringAppointments; track appt.id) {
+          <div class="appt-card appt-card--mentoring">
+            <div class="appt-card__accent"></div>
+            <div class="appt-card__body">
+              <div class="appt-card__date">
+                <i class="pi pi-calendar"></i>
+                {{ appt.date }}
+              </div>
+              <div class="appt-card__time">
+                <i class="pi pi-clock"></i>
+                {{ appt.time }} Uhr
+              </div>
+            </div>
+            <div class="appt-card__actions">
+              <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
+                <i class="pi pi-pencil"></i>
+              </button>
+              <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Dialog: Erstellen / Bearbeiten ── -->
+<p-dialog
+  [header]="dialogTitle"
+  [visible]="showDialog()"
+  (visibleChange)="showDialog.set($event)"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [style]="{ width: '400px' }"
+>
+  <div class="dialog-body">
+
+    <div class="dialog-field">
+      <label>Datum</label>
+      <p-datepicker
+        [(ngModel)]="dialogDate"
+        dateFormat="dd.mm.yy"
+        [showIcon]="true"
+        placeholder="Datum wählen"
+        appendTo="body">
+      </p-datepicker>
+    </div>
+
+    <div class="dialog-field">
+      <label>Uhrzeit</label>
+      <p-datepicker
+        [(ngModel)]="dialogTime"
+        [timeOnly]="true"
+        [showIcon]="true"
+        icon="pi pi-clock"
+        placeholder="Uhrzeit wählen"
+        appendTo="body">
+      </p-datepicker>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="btn-cancel" (click)="closeDialog()">Abbrechen</button>
+    <button
+      class="btn-save"
+      [class.btn-save--mentoring]="dialogType === 'mentoring'"
+      (click)="save()"
+    >
+      <i class="pi pi-check"></i>
+      {{ editMode() ? 'Speichern' : 'Erstellen' }}
+    </button>
+  </ng-template>
+</p-dialog>
