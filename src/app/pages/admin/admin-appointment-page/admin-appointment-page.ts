@@ -194,13 +194,17 @@ export class AdminAppointmentPage implements OnInit {
   // ── Delete ───────────────────────────────────────────────
   confirmDelete(appt: Appointment, event: Event) {
     this.confirmationService.confirm({
-      target:                event.target as EventTarget,
-      message:               `Termin am ${appt.date} um ${appt.time} Uhr wirklich löschen?`,
-      header:                'Termin löschen',
-      icon:                  'pi pi-trash',
-      acceptButtonStyleClass: 'p-button-danger',
-      accept:                () => this.deleteAppointment(appt),
+      target:  event.target as EventTarget,
+      message: `${this.formatDate(appt.date)} um ${appt.time.slice(0, 5)} Uhr`,
+      header:  'Termin löschen',
+      icon:    'pi pi-trash',
+      accept:  () => this.deleteAppointment(appt),
     });
+  }
+
+  private formatDate(date: string): string {
+    const [year, month, day] = date.split('-');
+    return `${day}.${month}.${year}`;
   }
 
   private async deleteAppointment(appt: Appointment) {
