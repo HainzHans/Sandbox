@@ -1,0 +1,9 @@
+<p-button
+  [label]="label()"
+  [icon]="icon() ? 'pi ' + icon() : ''"
+  [iconPos]="iconPos()"
+  [disabled]="disabled()"
+  [routerLink]="routerLink() ?? null"
+  (onClick)="onClick.emit($event)"
+  [styleClass]="'glow-btn glow-btn--' + variant()"
+></p-button>

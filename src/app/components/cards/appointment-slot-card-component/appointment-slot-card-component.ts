@@ -1,28 +1,22 @@
-import {Component, effect, input, output} from '@angular/core';
-import {Checkbox} from 'primeng/checkbox';
-import {FormsModule} from '@angular/forms';
-import {AppointmentSlot} from '../../../models/appointment-slot.model';
-import {DatePipe} from '@angular/common';
+import { Component, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {Appointment} from '../../../models/appointment.model';
+import {FormatDatePipe} from '../../../pipe/formatDatePipe';
 
 @Component({
-  selector: 'app-appointment-slot-card-component',
-  imports: [
-    Checkbox,
-    FormsModule,
-    DatePipe
-  ],
+  selector: 'app-appointment-slot-card',
+  standalone: true,
+  imports: [CommonModule, FormatDatePipe],
   templateUrl: './appointment-slot-card-component.html',
-  styleUrl: './appointment-slot-card-component.css',
+  styleUrls: ['./appointment-slot-card-component.css'],
 })
 export class AppointmentSlotCardComponent {
+  slot     = input.required<Appointment>();
+  selected = input<boolean>(false);
 
-  appointmentSlot = input<AppointmentSlot>();
-  isSelected = input<boolean>(false);
+  select = output<Appointment>();
 
-  onSelect = output<AppointmentSlot>();
-
-  selectAppointmentSlot() {
-    this.onSelect.emit(<AppointmentSlot>this.appointmentSlot());
+  onSelect(): void {
+    this.select.emit(this.slot());
   }
-
 }

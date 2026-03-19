@@ -1,161 +1,261 @@
-<section class="appointment-form-container">
+<section class="booking-section">
   <div class="container">
-    <div class="appointment-form-card">
 
-      <!-- Linke Spalte -->
-      <div class="form-left">
-        <img src="assets/images/logo_black.png" alt="Logo" class="header-logo" />
-      </div>
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      @for (step of steps; let i = $index; track step) {
+        <div
+          class="step-item"
+          [class.step-item--active]="currentStep() === i + 1"
+          [class.step-item--done]="currentStep() > i + 1"
+        >
+          <div class="step-circle">
+            <span class="step-number">{{ i + 1 }}</span>
+            <span class="step-check">
+              <i class="pi pi-check"></i>
+            </span>
+          </div>
+          <span class="step-label">{{ step }}</span>
+          <div class="step-line"></div>
+        </div>
+      }
+    </div>
 
-      <!-- Rechte Spalte -->
-      <div class="form-right">
+    <!-- Step 1: Produkt wählen -->
+    @if (currentStep() === 1) {
+      <div class="booking-card">
+        <div class="booking-card__header">
+          <span class="booking-card__eyebrow">Schritt 1</span>
+          <h2 class="booking-card__title">Was möchtest du buchen?</h2>
+        </div>
 
-        <!-- Stepper -->
-        <p-stepper [(value)]="activeStep" class="stepper">
+        <div class="product-grid">
+          <app-product-card
+            name="Live Trading"
+            description="Erlebe Trading in Echtzeit. Lerne Märkte zu lesen, Setups zu erkennen und Entscheidungen sicher zu treffen."
+            price="€ 150"
+            priceUnit="/ Session"
+            icon="pi-chart-line"
+            [features]="['Live Marktanalyse', 'Q&A in Echtzeit', 'Aufzeichnung inklusive']"
+            [selected]="selectedProduct() === 'livetrading'"
+            (select)="selectProduct('livetrading')"
+          ></app-product-card>
 
-          <!-- Step Icons -->
-          <p-step-list>
-            <p-step [value]="1">
-              <ng-template pTemplate="content" let-value="value">
-                <div class="step-icon" [class.active]="value <= activeStep">
-                  <i class="pi pi-user"></i>
-                </div>
-              </ng-template>
-            </p-step>
+          <app-product-card
+            name="Mentoring"
+            description="Begleitung auf deinem Weg zum profitablen Trader. Individuell, intensiv und auf dich zugeschnitten."
+            price="€ 1200"
+            priceUnit="/ LifeTime"
+            icon="pi-star"
+            [features]="['Persönlicher Mentor', 'Wöchentliche Calls', 'Unbegrenzte Nachrichten']"
+            [selected]="selectedProduct() === 'mentoring'"
+            (select)="selectProduct('mentoring')"
+          ></app-product-card>
+        </div>
 
-            <p-step [value]="2">
-              <ng-template pTemplate="content" let-value="value">
-                <div class="step-icon" [class.active]="value <= activeStep">
-                  <i class="pi pi-calendar"></i>
-                </div>
-              </ng-template>
-            </p-step>
-
-            <p-step [value]="3">
-              <ng-template pTemplate="content" let-value="value">
-                <div class="step-icon" [class.active]="value <= activeStep">
-                  <i class="pi pi-shopping-cart"></i>
-                </div>
-              </ng-template>
-            </p-step>
-          </p-step-list>
-
-          <!-- Step Panels -->
-          <p-step-panels>
-
-            <!-- STEP 1 -->
-            <p-step-panel [value]="1">
-              <ng-template #content>
-                <div class="form-wrapper">
-                  <h6>Gib hier deine Daten ein</h6>
-                  <div class="form-field">
-                    <label for="name">Vollständiger Name</label>
-                    <input id="name" pInputText [(ngModel)]="customerName" placeholder="Max Mustermann" />
-                  </div>
-
-                  <div class="form-field">
-                    <label for="phone">Telefon</label>
-                    <input id="phone" pInputText [(ngModel)]="customerPhone" placeholder="000 12345678" />
-                  </div>
-
-                  <div class="form-field">
-                    <label for="email">E-Mail</label>
-                    <input id="email" pInputText [(ngModel)]="customerEmail" placeholder="mustermann@gmail.com" />
-                  </div>
-
-                </div>
-              </ng-template>
-            </p-step-panel>
-
-            <!-- STEP 2 -->
-            <p-step-panel [value]="2">
-              <ng-template #content>
-                <h6>Wähle einen freien Termin</h6>
-                <div class="appointment-cards-wrapper">
-                  @for (appointment of appointmentSlots(); track appointment) {
-                    <app-appointment-slot-card-component
-                      [appointmentSlot]="appointment"
-                      [isSelected]="selectedAppointmentSlot === appointment"
-                      (onSelect)="selectAppointment($event)"
-                    ></app-appointment-slot-card-component>
-                  }
-                </div>
-
-              </ng-template>
-            </p-step-panel>
-
-            <!-- STEP 3 -->
-            <p-step-panel [value]="3">
-              <ng-template #content>
-              @if (!isBooked()) {
-                  <div class="form-wrapper">
-                    <h6>Prüfe deine Daten</h6>
-                    <div class="summary-item">
-                      <span class="summary-label">Name:</span>
-                      <span class="summary-value">{{ customerName }}</span>
-                    </div>
-
-                    <div class="summary-item">
-                      <span class="summary-label">Telefon:</span>
-                      <span class="summary-value">{{ customerPhone }}</span>
-                    </div>
-
-                    <div class="summary-item">
-                      <span class="summary-label">E-Mail:</span>
-                      <span class="summary-value">{{ customerEmail }}</span>
-                    </div>
-
-                    <div class="summary-item">
-                      <span class="summary-label">Datum:</span>
-                      <span class="summary-value">{{ selectedAppointmentSlot?.date | date:'dd.MM.yyyy' }}</span>
-                    </div>
-
-                    <div class="summary-item">
-                      <span class="summary-label">Uhrzeit:</span>
-                      <span class="summary-value">{{ selectedAppointmentSlot?.time?.slice(0,5) }} Uhr</span>
-                    </div>
-                  </div>
-                  <div class="button-wrapper">
-                    <button class="btn-clean" (click)="createBookingAppointment()">Jetzt buchen</button>
-                  </div>
-
-              } @else {
-                  <div class=" booked-wrapper">
-                    <h6>Dein Termin wurde erfolgreich gebucht!</h6>
-                    <span class="grey-text">Ich werde mich bald bei dir melden!</span>
-                  </div>
-              }
-              </ng-template>
-
-            </p-step-panel>
-          </p-step-panels>
-        </p-stepper>
-
-        <!-- Buttons unten -->
-        <div class="card-actions">
-
-          @if (activeStep > 1 && !isBooked) {
-            <p-button
-              label="Zurück"
-              severity="secondary"
-              icon="pi pi-arrow-left"
-              (onClick)="activeStep = activeStep - 1">
-            </p-button>
-          }
-
-          @if (activeStep < 3) {
-            <div></div>
-            <p-button
-              label="Weiter"
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              [disabled]="(activeStep === 1 && !isStep1Valid) || (activeStep === 2 && !isStep2Valid) "
-              (onClick)="activeStep = activeStep + 1">
-            </p-button>
-          }
-
+        <div class="booking-card__actions">
+          <app-glow-button
+            label="Weiter"
+            icon="pi-arrow-right"
+            iconPos="right"
+            [disabled]="!selectedProduct()"
+            (onClick)="nextStep()"
+          ></app-glow-button>
         </div>
       </div>
-    </div>
+    }
+
+    <!-- Step 2: Persönliche Daten -->
+    @if (currentStep() === 2) {
+      <div class="booking-card">
+        <div class="booking-card__header">
+          <span class="booking-card__eyebrow">Schritt 2</span>
+          <h2 class="booking-card__title">Deine Kontaktdaten</h2>
+        </div>
+
+        <form class="contact-form" [formGroup]="contactForm">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label">Vollständiger Name</label>
+              <div class="p-input-icon-left input-wrapper">
+                <i class="pi pi-user"></i>
+                <input
+                  pInputText
+                  formControlName="fullName"
+                  placeholder="Max Mustermann"
+                  class="booking-input"
+                  autocomplete="name"
+                  [class.ng-invalid]="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched"
+                />
+              </div>
+              @if (contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched) {
+                <small class="form-error">Bitte vollständigen Namen eingeben.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Telefonnummer</label>
+              <div class="p-input-icon-left input-wrapper">
+                <i class="pi pi-phone"></i>
+                <input
+                  pInputText
+                  formControlName="phone"
+                  placeholder="+49 123 456 789"
+                  class="booking-input"
+                  autocomplete="tel"
+                  [class.ng-invalid]="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+                />
+              </div>
+              @if (contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched) {
+                <small class="form-error">Bitte gültige Telefonnummer eingeben.</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">E-Mail-Adresse</label>
+            <div class="p-input-icon-left input-wrapper">
+              <i class="pi pi-envelope"></i>
+              <input
+                pInputText
+                formControlName="email"
+                placeholder="max@beispiel.de"
+                class="booking-input"
+                autocomplete="email"
+                [class.ng-invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+              />
+            </div>
+            @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+              <small class="form-error">Bitte gültige E-Mail-Adresse eingeben.</small>
+            }
+          </div>
+        </form>
+
+        <div class="booking-card__actions">
+          <app-glow-button
+            label="Zurück"
+            icon="pi-arrow-left"
+            variant="ghost"
+            (onClick)="prevStep()"
+          ></app-glow-button>
+          <app-glow-button
+            label="Termin wählen"
+            icon="pi-arrow-right"
+            iconPos="right"
+            [disabled]="contactForm.invalid"
+            (onClick)="nextStep()"
+          ></app-glow-button>
+        </div>
+      </div>
+    }
+
+    <!-- Step 3: Termin wählen -->
+    @if (currentStep() === 3) {
+      <div class="booking-card">
+        <div class="booking-card__header">
+          <span class="booking-card__eyebrow">Schritt 3</span>
+          <h2 class="booking-card__title">Freien Termin wählen</h2>
+        </div>
+
+        <!-- Ladezustand -->
+        @if (loadingSlots()) {
+          <div class="slots-loading">
+            <i class="pi pi-spin pi-spinner"></i>
+            <p>Termine werden geladen …</p>
+          </div>
+        }
+
+        <!-- Termine -->
+        @if (!loadingSlots()) {
+          <div class="slots-grid">
+            @for (slot of availableSlots(); track slot.id) {
+              <app-appointment-slot-card
+                [slot]="slot"
+                [selected]="selectedSlot()?.id === slot.id"
+                (select)="selectSlot($event)"
+              ></app-appointment-slot-card>
+            } @empty {
+              <div class="slots-empty">
+                <i class="pi pi-calendar-times"></i>
+                <p>Aktuell sind keine Termine verfügbar. Bitte kontaktiere uns direkt.</p>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="booking-card__actions">
+          <app-glow-button
+            label="Zurück"
+            icon="pi-arrow-left"
+            variant="ghost"
+            (onClick)="prevStep()"
+          ></app-glow-button>
+          <app-glow-button
+            label="Zur Übersicht"
+            icon="pi-arrow-right"
+            iconPos="right"
+            [disabled]="!selectedSlot()"
+            (onClick)="nextStep()"
+          ></app-glow-button>
+        </div>
+      </div>
+    }
+
+    <!-- Step 4: Übersicht & Bestätigung -->
+    @if (currentStep() === 4) {
+      <div class="booking-card booking-card--summary">
+        <div class="booking-card__header">
+          <span class="booking-card__eyebrow">Schritt 4</span>
+          <h2 class="booking-card__title">Deine Buchungsübersicht</h2>
+        </div>
+
+        <app-booking-summary
+          [product]="selectedProduct()"
+          [fullName]="contactForm.get('fullName')?.value"
+          [phone]="contactForm.get('phone')?.value"
+          [email]="contactForm.get('email')?.value"
+          [slot]="selectedSlot()"
+        ></app-booking-summary>
+
+        <div class="booking-card__actions">
+          <app-glow-button
+            label="Zurück"
+            icon="pi-arrow-left"
+            variant="ghost"
+            (onClick)="prevStep()"
+          ></app-glow-button>
+          <app-glow-button
+            label="Jetzt verbindlich buchen"
+            icon="pi-check"
+            iconPos="right"
+            (onClick)="submitBooking()"
+          ></app-glow-button>
+        </div>
+      </div>
+    }
+
+    <!-- Step 5: Erfolg -->
+    @if (currentStep() === 5) {
+      <div class="booking-card booking-card--success">
+        <div class="success-animation">
+          <div class="success-ring"></div>
+          <div class="success-icon">
+            <i class="pi pi-check"></i>
+          </div>
+        </div>
+        <h2 class="success-title">Buchung bestätigt!</h2>
+        <p class="success-text">
+          Du erhältst in Kürze eine Bestätigungs-E-Mail an
+          <strong>{{ contactForm.get('email')?.value }}</strong>.
+          Wir freuen uns auf dich!
+        </p>
+        <app-glow-button
+          label="Zurück zur Startseite"
+          icon="pi-home"
+          routerLink="/"
+        ></app-glow-button>
+      </div>
+    }
+
   </div>
 </section>

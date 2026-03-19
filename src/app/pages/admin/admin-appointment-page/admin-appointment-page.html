@@ -21,7 +21,7 @@
           <span class="column-icon"><i class="pi pi-chart-line"></i></span>
           <div>
             <span class="column-label">LiveTrading</span>
-            <span class="column-count">{{ livetradingAppointments.length }} Termine</span>
+            <span class="column-count">{{ liveTradingAppointments.length }} Termine</span>
           </div>
         </div>
         <button class="btn-add btn-add--livetrading" (click)="openCreate('livetrading')">
@@ -31,24 +31,24 @@
       </div>
 
       <div class="appointments-list">
-        @if (livetradingAppointments.length === 0) {
+        @if (liveTradingAppointments.length === 0 && !loading()) {
           <div class="empty-state">
             <i class="pi pi-calendar-times"></i>
             <span>Noch keine Termine</span>
           </div>
         }
 
-        @for (appt of livetradingAppointments; track appt.id) {
+        @for (appt of liveTradingAppointments; track appt.id) {
           <div class="appt-card appt-card--livetrading">
             <div class="appt-card__accent"></div>
             <div class="appt-card__body">
               <div class="appt-card__date">
                 <i class="pi pi-calendar"></i>
-                {{ appt.date }}
+                {{ appt.date | formatDate}}
               </div>
               <div class="appt-card__time">
                 <i class="pi pi-clock"></i>
-                {{ appt.time }} Uhr
+                {{ appt.time | slice:0:5}} Uhr
               </div>
             </div>
             <div class="appt-card__actions">
@@ -94,11 +94,11 @@
             <div class="appt-card__body">
               <div class="appt-card__date">
                 <i class="pi pi-calendar"></i>
-                {{ appt.date }}
+                {{ appt.date | formatDate}}
               </div>
               <div class="appt-card__time">
                 <i class="pi pi-clock"></i>
-                {{ appt.time }} Uhr
+                {{ appt.time | slice:0:5}} Uhr
               </div>
             </div>
             <div class="appt-card__actions">

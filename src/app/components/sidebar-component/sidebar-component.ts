@@ -2,6 +2,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {AuthService} from '../../services/auth-service';
+import {KingSizeLogoComponent} from '../king-size-logo-component/king-size-logo-component';
 
 export interface NavItem {
   icon: string;
@@ -13,7 +14,7 @@ export interface NavItem {
 @Component({
   selector: 'app-sidebar-component',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet, KingSizeLogoComponent],
   templateUrl: './sidebar-component.html',
   styleUrl: './sidebar-component.css',
 })
@@ -23,17 +24,12 @@ export class SidebarComponent{
   isExpanded = signal(true);
 
   navItems: NavItem[] = [
-    { icon: 'pi-home', label: 'Home', route: 'user-home' },
-    { icon: 'pi-info-circle', label: 'News', route: 'news', active: true },
-    { icon: 'pi-list', label: 'Tasks', route: 'tasks' },
-    { icon: 'pi-chart-bar', label: 'LiveTrading', route: 'livetrading' },
+
   ];
 
   adminItems: NavItem[] = [
     { icon: 'pi-users', label: 'Übersicht', route: 'admin-overview' },
     { icon: 'pi-calendar', label: 'Termine', route: 'admin-appointments' },
-    { icon: 'pi-list', label: 'Tasks', route: 'admin-tasks' },
-    { icon: 'pi-cog', label: 'Einstellungen', route: 'settings' },
   ];
 
   toggle() {

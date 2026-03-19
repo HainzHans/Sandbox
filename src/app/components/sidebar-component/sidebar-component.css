@@ -2,7 +2,7 @@
 :host {
   --sidebar-width-expanded: 240px;
   --sidebar-width-collapsed: 68px;
-  --toolbar-height: 56px;
+  --toolbar-height: 60px;
   --sidebar-bg: #0f1117;
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --toolbar-bg: #0f1117;
@@ -346,7 +346,7 @@
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: #e05252;
   cursor: pointer;
   flex-shrink: 0;
   margin-left: auto;
@@ -364,7 +364,6 @@
 
 .logout-btn:hover {
   background: var(--item-hover-bg);
-  color: #e05252;
 }
 
 /* ── Main Content ────────────────────────────────────────── */

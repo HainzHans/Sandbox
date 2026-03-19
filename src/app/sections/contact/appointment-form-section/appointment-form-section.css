@@ -1,99 +1,212 @@
-/* ----------------------------- */
-/* MOBILE FIRST                  */
-/* ----------------------------- */
+/* ============================================
+   BOOKING SECTION – Dark Luxury Theme
+   ============================================ */
 
-.appointment-form-container {
+.booking-section {
+  position: relative;
+  padding: 2rem 0 8rem;
   background: var(--primary-black);
-  padding-bottom: 10rem;
-  width: 100%;
+  overflow: hidden;
 }
 
-.appointment-form-card {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2.2rem;
-  border-radius: 1.5rem;
-  min-height: 520px;
-
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  outline: 1px solid rgba(0, 0, 0, 0.4);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
-
-  background: rgba(255, 255, 255, 0.06)
-  radial-gradient(circle at top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 60%);
+.booking-section .container {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-/* ----------------------------- */
-/* LEFT COLUMN                   */
-/* ----------------------------- */
+/* ============================================
+   STEP INDICATOR
+   ============================================ */
 
-.form-left {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  align-self: center;
-}
-
-.header-logo {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.task-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.task-step {
+.step-indicator {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   gap: 0.5rem;
 }
 
-.badge-dot {
-  background-color: var(--primary-green);
-  border-radius: 2rem;
-  width: 7px;
-  height: 7px;
-}
-
-/* ----------------------------- */
-/* RIGHT COLUMN                  */
-/* ----------------------------- */
-
-.form-right {
-  height: 100%;
+.step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
   display: flex;
-  flex-direction: column;
-}
-
-/* ----------------------------- */
-/* FORM FIELDS                   */
-/* ----------------------------- */
-
-.booked-wrapper {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding-top: 6rem;
+  justify-content: center;
+  position: relative;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(8px);
 }
 
-.form-wrapper {
+.step-number {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.step-check {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: var(--primary-white);
+  font-size: 0.85rem;
+}
+
+.step-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.step-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 0.5rem;
+  margin-bottom: 1.35rem;
+  transition: background 0.4s ease;
+  flex-shrink: 0;
+}
+
+/* Active step */
+.step-item--active .step-circle {
+  border-color: var(--primary-green);
+}
+.step-item--active .step-number {
+  color: var(--primary-green);
+}
+.step-item--active .step-label {
+  color: var(--primary-grey);
+}
+
+/* Done step */
+.step-item--done .step-circle {
+  border-color: var(--primary-green);
+}
+.step-item--done .step-number {
+  opacity: 0;
+}
+.step-item--done .step-check {
+  opacity: 1;
+}
+.step-item--done .step-label {
+  color: rgba(255, 255, 255, 0.45);
+}
+.step-item--done + .step-line,
+
+
+/* ============================================
+   BOOKING CARD (shared shell)
+   ============================================ */
+
+.booking-card {
+  min-height: 650px;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
-  width: 100%;
-  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2.5rem 2.5rem 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.2),
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
+.booking-card__header {
+  margin-bottom: 2rem;
+}
+
+.booking-card__eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  margin-bottom: 0.6rem;
+}
+
+.booking-card__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.booking-card__subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.booking-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   STEP 1 – PRODUCT CARDS
+   ============================================ */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   STEP 2 – CONTACT FORM
+   ============================================ */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
 
 .form-field {
   display: flex;
@@ -101,203 +214,202 @@
   gap: 0.4rem;
 }
 
-.form-field label {
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper .pi {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.3);
   font-size: 0.9rem;
-  color: var(--primary-grey);
-}
-
-.form-field input {
-  width: 100%;
-}
-
-/* ----------------------------- */
-/* STEPPER                       */
-/* ----------------------------- */
-
-.stepper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.p-stepper {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column;
-}
-
-.p-stepper-list {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.p-stepper-panels {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.p-stepper-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.step-content,
-.form-wrapper,
-.date-time-grid {
-  flex: 1;
-}
-
-/* Step Icons */
-.step-icon {
-  width: 2.8rem;
-  height: 2.8rem;
-  border: 2px solid var(--primary-grey);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.3rem;
-  color: var(--primary-grey);
-  transition: 0.25s ease;
+  z-index: 1;
   pointer-events: none;
 }
 
-.step-icon.active {
-  border-color: var(--primary-green);
-  color: var(--primary-green);
+.booking-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.75rem !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  font-size: 0.9rem !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+  box-sizing: border-box;
 }
 
-/* ----------------------------- */
-/* BUTTONS                       */
-/* ----------------------------- */
+.booking-input::placeholder {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
 
-.card-actions {
+.booking-input:focus {
+  border-color: var(--primary-green) !important;
+  outline: none !important;
+}
+
+.booking-input.ng-invalid {
+  border-color: rgba(255, 80, 80, 0.5) !important;
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: #ff6b6b;
+  margin-top: 0.15rem;
+}
+
+/* ============================================
+   STEP 3 – TIME SLOTS
+   ============================================ */
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+
+
+/* ============================================
+   STEP 4 – SUMMARY
+   ============================================ */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 560px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   STEP 5 – SUCCESS
+   ============================================ */
+
+.booking-card--success {
+  text-align: center;
+  padding: 4rem 2rem;
   display: flex;
-  justify-content: space-between;
-  margin-top: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-/* ----------------------------- */
-/* DATE + TIME GRID              */
-/* ----------------------------- */
-
-.appointment-cards-wrapper {
+.success-animation {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.success-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--primary-green);
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0.2; }
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(var(--primary-green));
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 3rem;
-}
-
-/* ----------------------------- */
-/* SUMMARY (STEP 3)              */
-/* ----------------------------- */
-
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.summary-label {
-  color: var(--primary-grey);
-  font-size: 0.95rem;
-}
-
-.summary-value {
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
   color: white;
-  font-weight: 500;
-  font-size: 1rem;
+  animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  padding-top: 2rem;
+@keyframes pop-in {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
-
-
-.btn-clean {
-  padding: 0.9rem 2rem;
-  background: transparent;
-  border: 1px solid var(--primary-green);
-  color: var(--primary-green);
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.success-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
 }
 
-.btn-clean:hover {
-  background: var(--primary-green);
-  color: var(--primary-white);
+.success-text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 400px;
+  line-height: 1.7;
+  margin: 0;
 }
 
-/* ----------------------------- */
-/* TABLET                        */
-/* ----------------------------- */
-
-@media (min-width: 640px) {
-  .step-icon {
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.4rem;
-  }
-
-  .appointment-cards-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    column-gap: 3rem;
-  }
+.success-text strong {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* ----------------------------- */
-/* DESKTOP                       */
-/* ----------------------------- */
+/* ============================================
+   BUTTONS
+   ============================================ */
 
-@media (min-width: 1024px) {
-  .appointment-form-card {
-    flex-direction: row;
-    align-items: stretch;
-    max-height: 700px;
-    height: 700px;
-  }
-
-  .form-left {
-    flex: 1;
-  }
-
-  .form-right {
-    flex: 4;
-  }
-
-  .date-time-grid {
-    flex-direction: row;
-    gap: 3rem;
-  }
-
-  .date-column {
-    flex: 1;
-  }
-
-  .time-column {
-    flex: 1;
-  }
-
-  .time-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .step-icon {
-    width: 3.4rem;
-    height: 3.4rem;
-    font-size: 1.5rem;
-  }
+:host ::ng-deep .booking-btn {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 0.7rem 1.4rem !important;
+  transition: all 0.25s ease !important;
+  border: none !important;
 }
 
+:host ::ng-deep .booking-btn--primary {
+  background: linear-gradient(135deg, #4f7fff, #7aa3ff) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(79, 127, 255, 0.35) !important;
+}
+:host ::ng-deep .booking-btn--primary:hover:not(:disabled) {
+  box-shadow: 0 6px 28px rgba(79, 127, 255, 0.5) !important;
+  transform: translateY(-1px);
+}
+:host ::ng-deep .booking-btn--primary:disabled {
+  opacity: 0.35 !important;
+}
+
+:host ::ng-deep .booking-btn--ghost {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+:host ::ng-deep .booking-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+:host ::ng-deep .booking-btn--cta {
+  padding: 0.85rem 2rem !important;
+  font-size: 0.95rem !important;
+}

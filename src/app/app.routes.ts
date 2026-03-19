@@ -6,22 +6,18 @@ import {AdminLoginComponent} from './components/admin-login-component/admin-logi
 import {SidebarComponent} from './components/sidebar-component/sidebar-component';
 import {AdminOverviewPage} from './pages/admin/admin-overview-page/admin-overview-page';
 import {AdminAppointmentPage} from './pages/admin/admin-appointment-page/admin-appointment-page';
-import {AdminTasksPage} from './pages/admin/admin-tasks-page/admin-tasks-page';
-import {UserHomePage} from './pages/user/user-home-page/user-home-page';
 
 export const routes: Routes = [
-  { path: '', component: KingSizePage },
-  { path: 'contact', component: ContactPage },
+  { path: '', component: KingSizePage, canActivate: [adminGuard], },
+  { path: 'contact', component: ContactPage, canActivate: [adminGuard], },
   { path: 'admin-login', component: AdminLoginComponent },
   {
-    path: 'app',
+    path: 'admin',
     component: SidebarComponent,
     canActivate: [adminGuard],
     children: [
       { path: 'admin-overview', component: AdminOverviewPage, canActivate: [adminGuard] },
       { path: 'admin-appointments', component: AdminAppointmentPage, canActivate: [adminGuard] },
-      { path: 'admin-tasks', component: AdminTasksPage, canActivate: [adminGuard] },
-      { path: 'user-home', component: UserHomePage},
     ]
   },
 ];

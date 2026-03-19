@@ -2,7 +2,8 @@
 
   <!-- ── Toolbar ── -->
   <header class="toolbar">
-    <img src="assets/images/logo_black.png" alt="Logo" class="header-logo" />
+    <app-king-size-logo-component [isSmall]="true"
+    ></app-king-size-logo-component>
     <span class="toolbar-title">KingSize Corp</span>
     <div class="toolbar-actions">
       <button class="toolbar-icon-btn"><i class="pi pi-bell"></i></button>
@@ -59,7 +60,7 @@
         </div>
         <div class="user-info">
           <span class="user-name">Profil</span>
-          <span class="user-role">Schüler</span>
+          <span class="user-role">Admin</span>
         </div>
         <button class="logout-btn" (click)="logout()" title="Abmelden">
           <i class="pi pi-sign-out"></i>

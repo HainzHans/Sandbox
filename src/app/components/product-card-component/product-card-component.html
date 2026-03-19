@@ -1,0 +1,33 @@
+<div
+  class="product-card"
+  [class.product-card--selected]="selected()"
+  (click)="onSelect()"
+>
+  <div class="product-card__glow"></div>
+
+  <div class="product-card__icon">
+    <i [class]="'pi ' + icon()"></i>
+  </div>
+
+  @if (badge()) {
+    <div class="product-card__badge">{{ badge() }}</div>
+  }
+
+  <h3 class="product-card__name">{{ name() }}</h3>
+  <p class="product-card__desc">{{ description() }}</p>
+
+  <div class="product-card__price">
+    <span class="product-card__price-amount">{{ price() }}</span>
+    <span class="product-card__price-unit">{{ priceUnit() }}</span>
+  </div>
+
+  <ul class="product-card__features">
+    @for (feature of features(); track feature) {
+      <li><i class="pi pi-check-circle"></i> {{ feature }}</li>
+    }
+  </ul>
+
+  <div class="product-card__select-indicator">
+    <i class="pi pi-check"></i>
+  </div>
+</div>

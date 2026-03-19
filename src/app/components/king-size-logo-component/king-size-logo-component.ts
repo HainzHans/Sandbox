@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NavigationService} from '../../services/navigation-service/navigation-service';
 
 @Component({
@@ -8,6 +8,8 @@ import {NavigationService} from '../../services/navigation-service/navigation-se
   styleUrl: './king-size-logo-component.css',
 })
 export class KingSizeLogoComponent {
+
+  isSmall = input<boolean>(false);
 
   constructor(private navigationService: NavigationService) {
   }
