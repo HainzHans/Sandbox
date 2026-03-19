@@ -92,75 +92,75 @@ export class CustomerRefSection implements AfterViewInit {
 
   topCustomers: CustomerRef[] = [
     {
-      name: 'Max Mustermann',
-      review: 4
-    },
-    {
-      name: 'Sepp Mustermann',
+      name: 'Anonym',
       review: 5
     },
     {
-      name: 'Maier Holz',
+      name: 'Christian',
       review: 5
     },
     {
-      name: 'Frau Maier',
-      review: 4
-    },
-    {
-      name: 'Klaus Klaus',
-      review: 4
-    },
-    {
-      name: 'Max Mustermann',
+      name: 'Ingmar',
       review: 5
     },
     {
-      name: 'Max Mustermann',
-      review: 4
-    },
-    {
-      name: 'Martina H.',
+      name: 'Anonym',
       review: 5
     },
     {
-      name: 'Regina Mustermann',
+      name: 'Anonym',
       review: 5
     },
     {
-      name: 'Max Mustermann',
-      review: 4
-    },
-    {
-      name: 'Sepp Mustermann',
+      name: 'Anonym',
       review: 5
     },
     {
-      name: 'Maier Holz',
+      name: 'Saskia',
       review: 5
     },
     {
-      name: 'Frau Maier',
-      review: 4
-    },
-    {
-      name: 'Klaus Klaus',
-      review: 4
-    },
-    {
-      name: 'Max Mustermann',
+      name: 'Anonym',
       review: 5
     },
     {
-      name: 'Max Mustermann',
-      review: 4
-    },
-    {
-      name: 'Martina H.',
+      name: 'Simon',
       review: 5
     },
     {
-      name: 'Regina Mustermann',
+      name: 'Holger',
+      review: 5
+    },
+    {
+      name: 'Anonym',
+      review: 5
+    },
+    {
+      name: 'Anonym',
+      review: 5
+    },
+    {
+      name: 'Taha',
+      review: 5
+    },
+    {
+      name: 'Madjid',
+      review: 5
+    },
+    {
+      name: 'Anonym',
+      review: 5
+    },
+    {
+      name: 'M.',
+      review: 5
+    },
+    {
+      name: 'Johannes',
+      review: 5
+    },
+    {
+      name: 'S.',
       review: 5
     }
   ]

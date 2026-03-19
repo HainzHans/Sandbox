@@ -14,7 +14,8 @@ import {AppointmentService} from '../../../services/appointment-service/appointm
 })
 export class IntroSection implements OnInit{
 
-  freeSlots: number = 0;
+  freeMentoringSlots: number = 0;
+  freeLiveTradingSlots: number = 0;
 
   constructor(private appointmentService: AppointmentService) {
   }
@@ -25,7 +26,11 @@ export class IntroSection implements OnInit{
 
   loadData() {
     this.appointmentService.getAvailableByType('mentoring').then((appointments) => {
-      this.freeSlots = appointments.length
+      this.freeMentoringSlots = appointments.length
+    })
+
+    this.appointmentService.getAvailableByType('livetrading').then((appointments) => {
+      this.freeLiveTradingSlots = appointments.length
     })
   }
 }

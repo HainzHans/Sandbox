@@ -1,35 +1,42 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import {AuthService} from '../../services/auth-service';
-import {KingSizeLogoComponent} from '../king-size-logo-component/king-size-logo-component';
+import { RouterOutlet } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
+import { KingSizeLogoComponent } from '../king-size-logo-component/king-size-logo-component';
+import { AdminOverviewPage } from '../../pages/admin/admin-overview-page/admin-overview-page';
+import { AdminAppointmentPage } from '../../pages/admin/admin-appointment-page/admin-appointment-page';
 
 export interface NavItem {
-  icon: string;
-  label: string;
-  route: string;
-  active?: boolean;
+  icon:      string;
+  label:     string;
+  key:       string;
+  active?:   boolean;
 }
 
 @Component({
   selector: 'app-sidebar-component',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, KingSizeLogoComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    KingSizeLogoComponent,
+    AdminOverviewPage,
+    AdminAppointmentPage,
+  ],
   templateUrl: './sidebar-component.html',
   styleUrl: './sidebar-component.css',
 })
-export class SidebarComponent{
+export class SidebarComponent {
   private authService = inject(AuthService);
 
-  isExpanded = signal(true);
+  isExpanded  = signal(true);
+  activeKey   = signal<string>('admin-overview');
 
-  navItems: NavItem[] = [
-
-  ];
+  navItems: NavItem[] = [];
 
   adminItems: NavItem[] = [
-    { icon: 'pi-users', label: 'Übersicht', route: 'admin-overview' },
-    { icon: 'pi-calendar', label: 'Termine', route: 'admin-appointments' },
+    { icon: 'pi-users',    label: 'Übersicht', key: 'admin-overview'     },
+    { icon: 'pi-calendar', label: 'Termine',   key: 'admin-appointments' },
   ];
 
   toggle() {
@@ -39,8 +46,8 @@ export class SidebarComponent{
   setActive(item: NavItem) {
     [...this.navItems, ...this.adminItems].forEach(i => (i.active = false));
     item.active = true;
+    this.activeKey.set(item.key);
   }
-
 
   logout() {
     this.authService.logout();

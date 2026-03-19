@@ -18,14 +18,6 @@
       </div>
       <div class="stat-card__bar" style="--fill: 100%"></div>
     </div>
-    <div class="stat-card stat-card--active">
-      <div class="stat-card__icon"><i class="pi pi-user-plus"></i></div>
-      <div class="stat-card__body">
-        <span class="stat-card__value">{{ activeUsers }}</span>
-        <span class="stat-card__label">Aktive Nutzer</span>
-      </div>
-      <div class="stat-card__bar" [style]="'--fill: ' + (activeUsers / totalUsers * 100) + '%'"></div>
-    </div>
     <div class="stat-card stat-card--revenue">
       <div class="stat-card__icon"><i class="pi pi-euro"></i></div>
       <div class="stat-card__body">
@@ -60,21 +52,34 @@
     </div>
 
     <p-table
-      [value]="users"
-      dataKey="id"
+      [value]="filteredUsers"
+      dataKey="email"
       [expandedRowKeys]="expandedRows"
       (onRowExpand)="onRowExpand($event)"
       (onRowCollapse)="onRowCollapse($event)"
       [paginator]="true"
       [rows]="10"
+      [sortMode]="'single'"
       [tableStyle]="{ 'min-width': '55rem' }"
     >
 
-      <!-- Caption mit Expand/Collapse Buttons -->
+      <!-- Caption -->
       <ng-template #caption>
         <div class="table-caption">
-          <p-button severity="secondary" label="Alle aufklappen" icon="pi pi-plus" [text]="true" (onClick)="expandAll()" />
-          <p-button severity="secondary" label="Alle zuklappen" icon="pi pi-minus" [text]="true" (onClick)="collapseAll()" />
+          <div class="table-caption__search">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="searchEmail"
+              placeholder="Suchen…"
+              class="search-input"
+            />
+          </div>
+          <div class="table-caption__actions">
+            <p-button severity="secondary" label="Alle aufklappen" icon="pi pi-plus" [text]="true" (onClick)="expandAll()" />
+            <p-button severity="secondary" label="Alle zuklappen" icon="pi pi-minus" [text]="true" (onClick)="collapseAll()" />
+          </div>
         </div>
       </ng-template>
 
@@ -82,13 +87,22 @@
       <ng-template #header>
         <tr>
           <th style="width: 3.5rem"></th>
-          <th>ID</th>
-          <th>Name</th>
+          <th pSortableColumn="name">
+            Name <p-sortIcon field="name" />
+          </th>
+          <th pSortableColumn="email">
+            E-Mail <p-sortIcon field="email" />
+          </th>
           <th>Telefon</th>
-          <th>E-Mail</th>
-          <th>Käufe</th>
-          <th>Umsatz</th>
-          <th>Status</th>
+          <th pSortableColumn="purchases.length">
+            Käufe <p-sortIcon field="purchases.length" />
+          </th>
+          <th pSortableColumn="revenue">
+            Umsatz <p-sortIcon field="revenue" />
+          </th>
+          <th pSortableColumn="status">
+            Status <p-sortIcon field="status" />
+          </th>
         </tr>
       </ng-template>
 
@@ -106,15 +120,14 @@
               [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
             />
           </td>
-          <td class="cell-id">#{{ user.id }}</td>
           <td>
             <div class="name-cell">
-              <div class="name-avatar" [attr.data-status]="user.status">{{ user.name.charAt(0) }}</div>
+              <div class="name-avatar">{{ user.name.charAt(0) }}</div>
               <span class="name-text">{{ user.name }}</span>
             </div>
           </td>
-          <td class="cell-muted">{{ user.phone }}</td>
           <td class="cell-muted">{{ user.email }}</td>
+          <td class="cell-muted">{{ user.phone }}</td>
           <td>
             <span class="purchase-count" [class.zero]="user.purchases.length === 0">
               {{ user.purchases.length }}
@@ -127,10 +140,10 @@
         </tr>
       </ng-template>
 
-      <!-- Expanded Row — exakt wie offizielle PrimeNG Doku: #expandedrow -->
+      <!-- Expanded Row -->
       <ng-template #expandedrow let-user>
         <tr>
-          <td colspan="8">
+          <td colspan="7">
             <div class="expansion-container">
 
               @if (user.purchases.length === 0) {
@@ -149,7 +162,7 @@
                 <p-table [value]="user.purchases" dataKey="type">
                   <ng-template #header>
                     <tr>
-                      <th>Typ / Produkt</th>
+                      <th>Produkt</th>
                       <th>Datum</th>
                       <th>Uhrzeit</th>
                       <th>Status</th>
@@ -167,7 +180,7 @@
                       <td><span class="inline-chip"><i class="pi pi-calendar"></i>{{ p.date }}</span></td>
                       <td><span class="inline-chip"><i class="pi pi-clock"></i>{{ p.time }} Uhr</span></td>
                       <td><p-tag [value]="p.status" [severity]="getPurchaseSeverity(p.status)" /></td>
-                      <td><span class="price-cell"> {{ p.price | currency:'EUR':'symbol':'1.0-0' }}</span></td>
+                      <td><span class="price-cell">{{ p.price | currency:'EUR':'symbol':'1.0-0' }}</span></td>
                     </tr>
                   </ng-template>
                   <ng-template #emptymessage>
@@ -182,9 +195,11 @@
       </ng-template>
 
       <ng-template #emptymessage>
-        <tr><td colspan="8" class="empty-msg">
-          <i class="pi pi-users"></i> Keine Nutzer gefunden
-        </td></tr>
+        <tr>
+          <td colspan="7" class="empty-msg">
+            <i class="pi pi-users"></i> Keine Nutzer gefunden
+          </td>
+        </tr>
       </ng-template>
 
     </p-table>

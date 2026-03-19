@@ -225,17 +225,18 @@
             (onClick)="prevStep()"
           ></app-glow-button>
           <app-glow-button
-            label="Jetzt verbindlich buchen"
-            icon="pi-check"
+            label="Jetzt buchen"
+            [icon]="submitting() ? 'pi-spin pi-spinner' : 'pi-check'"
             iconPos="right"
+            [disabled]="submitting()"
             (onClick)="submitBooking()"
           ></app-glow-button>
         </div>
       </div>
     }
 
-    <!-- Step 5: Erfolg -->
-    @if (currentStep() === 5) {
+    <!-- Step 5: Erfolgreich bezahlt -->
+    @if (currentStep() === 5 && bookingStatus() === 'success') {
       <div class="booking-card booking-card--success">
         <div class="success-animation">
           <div class="success-ring"></div>
@@ -245,8 +246,7 @@
         </div>
         <h2 class="success-title">Buchung bestätigt!</h2>
         <p class="success-text">
-          Du erhältst in Kürze eine Bestätigungs-E-Mail an
-          <strong>{{ contactForm.get('email')?.value }}</strong>.
+          Du erhältst in Kürze eine Bestätigungs-E-Mail.
           Wir freuen uns auf dich!
         </p>
         <app-glow-button
@@ -254,6 +254,36 @@
           icon="pi-home"
           routerLink="/"
         ></app-glow-button>
+      </div>
+    }
+
+    <!-- Step 5: Zahlung abgebrochen -->
+    @if (currentStep() === 5 && bookingStatus() === 'cancel') {
+      <div class="booking-card booking-card--cancel">
+        <div class="cancel-animation">
+          <div class="cancel-ring"></div>
+          <div class="cancel-icon">
+            <i class="pi pi-times"></i>
+          </div>
+        </div>
+        <h2 class="cancel-title">Zahlung abgebrochen</h2>
+        <p class="cancel-text">
+          Der Bezahlvorgang wurde abgebrochen.
+          Der Termin wird in Kürze automatisch wieder freigegeben.
+        </p>
+        <div class="booking-card__actions">
+          <app-glow-button
+            label="Erneut versuchen"
+            icon="pi-refresh"
+            (onClick)="retry()"
+          ></app-glow-button>
+          <app-glow-button
+            label="Zur Startseite"
+            icon="pi-home"
+            variant="ghost"
+            routerLink="/"
+          ></app-glow-button>
+        </div>
       </div>
     }
 

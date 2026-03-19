@@ -14,7 +14,8 @@ import {
   UpdateAppointmentDto,
 } from '../../../models/appointment.model';
 import { AppointmentService } from '../../../services/appointment-service/appointment.service';
-import {FormatDatePipe} from '../../../pipe/formatDatePipe';
+import { FormatDatePipe } from '../../../pipe/formatDatePipe';
+import {BookedAppointment, BookingService} from '../../../services/booking-service/booking.service';
 
 @Component({
   selector: 'app-termine-page',
@@ -35,6 +36,9 @@ import {FormatDatePipe} from '../../../pipe/formatDatePipe';
 })
 export class AdminAppointmentPage implements OnInit {
 
+  // ── Tabs ──────────────────────────────────────────────────
+  activeTab = signal<'manage' | 'booked'>('manage');
+
   // ── Dialog state ─────────────────────────────────────────
   showDialog = signal(false);
   editMode   = signal(false);
@@ -47,26 +51,39 @@ export class AdminAppointmentPage implements OnInit {
   editingId:           string | null = null;
 
   // ── Data ─────────────────────────────────────────────────
-  liveTradingAppointments: Appointment[] = [];
-  mentoringAppointments:   Appointment[] = [];
+  liveTradingAppointments: Appointment[]       = [];
+  mentoringAppointments:   Appointment[]       = [];
+  bookedAppointments:      BookedAppointment[] = [];
 
   constructor(
-    private messageService:      MessageService,
-    private confirmationService: ConfirmationService,
-    private appointmentService:  AppointmentService,
+    private messageService:           MessageService,
+    private confirmationService:      ConfirmationService,
+    private appointmentService:       AppointmentService,
+    private bookedAppointmentService: BookingService,
   ) {}
 
   ngOnInit() {
     this.loadAppointments();
   }
 
+  // ── Tab Switch ───────────────────────────────────────────
+  setTab(tab: 'manage' | 'booked') {
+    this.activeTab.set(tab);
+    if (tab === 'booked' && this.bookedAppointments.length === 0) {
+      this.loadBooked();
+    }
+  }
+
   // ── Load ─────────────────────────────────────────────────
   private async loadAppointments() {
     this.loading.set(true);
     try {
-      const all = await this.appointmentService.getAll();
-      this.liveTradingAppointments = all.filter(a => a.type === 'livetrading');
-      this.mentoringAppointments   = all.filter(a => a.type === 'mentoring');
+      const [mentoring, livetrading] = await Promise.all([
+        this.appointmentService.getAvailableByType('mentoring'),
+        this.appointmentService.getAvailableByType('livetrading'),
+      ]);
+      this.mentoringAppointments   = mentoring;
+      this.liveTradingAppointments = livetrading;
     } catch {
       this.messageService.add({
         severity: 'error',
@@ -76,6 +93,26 @@ export class AdminAppointmentPage implements OnInit {
     } finally {
       this.loading.set(false);
     }
+  }
+
+  private async loadBooked() {
+    this.loading.set(true);
+    try {
+      this.bookedAppointments = await this.bookedAppointmentService.getUpcomingBooked();
+    } catch {
+      this.messageService.add({
+        severity: 'error',
+        summary:  'Fehler',
+        detail:   'Gebuchte Termine konnten nicht geladen werden.',
+      });
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  // ── Hilfsmethode: Typ-Label ──────────────────────────────
+  typeLabel(type: string): string {
+    return type === 'livetrading' ? 'LiveTrading' : 'Mentoring';
   }
 
   // ── Open dialog ──────────────────────────────────────────
@@ -114,13 +151,11 @@ export class AdminAppointmentPage implements OnInit {
       return;
     }
 
-    // 'YYYY-MM-DD' — Supabase-Format
     const day     = String(this.dialogDate.getDate()).padStart(2, '0');
     const month   = String(this.dialogDate.getMonth() + 1).padStart(2, '0');
     const year    = this.dialogDate.getFullYear();
-    const dateStr = `${year}-${month}-${day}`;  // → 'YYYY-MM-DD' für Supabase
+    const dateStr = `${year}-${month}-${day}`;
 
-    // 'HH:MM' — Supabase-Format
     const hours   = String(this.dialogTime.getHours()).padStart(2, '0');
     const minutes = String(this.dialogTime.getMinutes()).padStart(2, '0');
     const timeStr = `${hours}:${minutes}`;
@@ -129,7 +164,6 @@ export class AdminAppointmentPage implements OnInit {
 
     try {
       if (this.editMode() && this.editingId) {
-
         const dto: UpdateAppointmentDto = {
           date:            dateStr,
           time:            timeStr,
@@ -137,14 +171,8 @@ export class AdminAppointmentPage implements OnInit {
         };
         const updated = await this.appointmentService.update(this.editingId, dto);
         this.replaceInList(updated);
-        this.messageService.add({
-          severity: 'success',
-          summary:  'Gespeichert',
-          detail:   'Termin wurde aktualisiert.',
-        });
-
+        this.messageService.add({ severity: 'success', summary: 'Gespeichert', detail: 'Termin wurde aktualisiert.' });
       } else {
-
         const dto: CreateAppointmentDto = {
           type:            this.dialogType,
           date:            dateStr,
@@ -153,21 +181,11 @@ export class AdminAppointmentPage implements OnInit {
         };
         const created = await this.appointmentService.create(dto);
         this.addToList(created);
-        const label = this.dialogType === 'livetrading' ? 'LiveTrading' : 'Mentoring';
-        this.messageService.add({
-          severity: 'success',
-          summary:  'Erstellt',
-          detail:   `${label}-Termin am ${dateStr} um ${timeStr} Uhr angelegt.`,
-        });
-
+        this.messageService.add({ severity: 'success', summary: 'Erstellt', detail: `${this.typeLabel(this.dialogType)}-Termin angelegt.` });
       }
       this.closeDialog();
     } catch {
-      this.messageService.add({
-        severity: 'error',
-        summary:  'Fehler',
-        detail:   'Termin konnte nicht gespeichert werden.',
-      });
+      this.messageService.add({ severity: 'error', summary: 'Fehler', detail: 'Termin konnte nicht gespeichert werden.' });
     } finally {
       this.loading.set(false);
     }
@@ -190,17 +208,9 @@ export class AdminAppointmentPage implements OnInit {
     try {
       await this.appointmentService.delete(appt.id);
       this.removeFromList(appt);
-      this.messageService.add({
-        severity: 'info',
-        summary:  'Gelöscht',
-        detail:   'Termin wurde entfernt.',
-      });
+      this.messageService.add({ severity: 'info', summary: 'Gelöscht', detail: 'Termin wurde entfernt.' });
     } catch {
-      this.messageService.add({
-        severity: 'error',
-        summary:  'Fehler',
-        detail:   'Termin konnte nicht gelöscht werden.',
-      });
+      this.messageService.add({ severity: 'error', summary: 'Fehler', detail: 'Termin konnte nicht gelöscht werden.' });
     } finally {
       this.loading.set(false);
     }
@@ -217,27 +227,24 @@ export class AdminAppointmentPage implements OnInit {
 
   private replaceInList(appt: Appointment) {
     if (appt.type === 'livetrading') {
-      this.liveTradingAppointments = this.liveTradingAppointments
-        .map(a => a.id === appt.id ? appt : a);
+      this.liveTradingAppointments = this.liveTradingAppointments.map(a => a.id === appt.id ? appt : a);
     } else {
-      this.mentoringAppointments = this.mentoringAppointments
-        .map(a => a.id === appt.id ? appt : a);
+      this.mentoringAppointments = this.mentoringAppointments.map(a => a.id === appt.id ? appt : a);
     }
   }
 
   private removeFromList(appt: Appointment) {
     if (appt.type === 'livetrading') {
-      this.liveTradingAppointments = this.liveTradingAppointments
-        .filter(a => a.id !== appt.id);
+      this.liveTradingAppointments = this.liveTradingAppointments.filter(a => a.id !== appt.id);
     } else {
-      this.mentoringAppointments = this.mentoringAppointments
-        .filter(a => a.id !== appt.id);
+      this.mentoringAppointments = this.mentoringAppointments.filter(a => a.id !== appt.id);
     }
   }
 
   // ── Getter ───────────────────────────────────────────────
   get dialogTitle(): string {
-    const label = this.dialogType === 'livetrading' ? 'LiveTrading' : 'Mentoring';
-    return this.editMode() ? `${label}-Termin bearbeiten` : `${label}-Termin erstellen`;
+    return this.editMode()
+      ? `${this.typeLabel(this.dialogType)}-Termin bearbeiten`
+      : `${this.typeLabel(this.dialogType)}-Termin erstellen`;
   }
 }

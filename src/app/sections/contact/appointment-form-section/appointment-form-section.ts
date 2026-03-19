@@ -1,7 +1,7 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {ActivatedRoute, RouterModule} from '@angular/router';
 
 // PrimeNG
 import { ButtonModule } from 'primeng/button';
@@ -16,6 +16,7 @@ import { GlowButtonComponent } from '../../../components/buttons/glow-button-com
 // Models & Services
 import { Appointment, AppointmentType } from '../../../models/appointment.model';
 import { AppointmentService } from '../../../services/appointment-service/appointment.service';
+import {BookingService} from '../../../services/booking-service/booking.service';
 
 @Component({
   selector: 'app-appointment-form-section',
@@ -41,14 +42,18 @@ export class AppointmentFormSection implements OnInit {
   selectedSlot    = signal<Appointment | undefined>(undefined);
   availableSlots  = signal<Appointment[]>([]);
   loadingSlots    = signal<boolean>(false);
+  bookingStatus = signal<'success' | 'cancel' | null>(null);
+  submitting = signal(false);
 
   steps = ['Produkt', 'Kontakt', 'Termin', 'Übersicht'];
 
   contactForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private fb:                 FormBuilder,
     private appointmentService: AppointmentService,
+    private bookingService:     BookingService,
+    private route:              ActivatedRoute,  // ← neu
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +62,16 @@ export class AppointmentFormSection implements OnInit {
       phone:    ['', [Validators.required, Validators.pattern(/^\+?[\d\s\-()]{7,20}$/)]],
       email:    ['', [Validators.required, Validators.email]],
     });
+
+    // Status aus URL lesen wenn User von Stripe zurückkommt
+    const status = this.route.snapshot.queryParamMap.get('status');
+    if (status === 'success') {
+      this.bookingStatus.set('success');
+      this.currentStep.set(5);
+    } else if (status === 'cancel') {
+      this.bookingStatus.set('cancel');
+      this.currentStep.set(5);
+    }
   }
 
   /* ── Navigation ─────────────────────────────────────────── */
@@ -92,7 +107,7 @@ export class AppointmentFormSection implements OnInit {
   }
 
   /* ── Load slots ─────────────────────────────────────────── */
-  private async loadSlots(type: AppointmentType): Promise<void> {
+  protected async loadSlots(type: AppointmentType): Promise<void> {
     this.loadingSlots.set(true);
     this.selectedSlot.set(undefined);
     try {
@@ -105,17 +120,39 @@ export class AppointmentFormSection implements OnInit {
     }
   }
 
+  retry(): void {
+    this.bookingStatus.set(null);
+    this.selectedSlot.set(undefined);
+    this.currentStep.set(3);
+    this.loadSlots(this.selectedProduct()!);
+  }
+
   /* ── Submit ─────────────────────────────────────────────── */
   async submitBooking(): Promise<void> {
     if (this.contactForm.invalid || !this.selectedProduct() || !this.selectedSlot()) return;
 
-    // TODO: BookingService aufrufen + Stripe Redirect
-    console.log('Booking payload:', {
-      product: this.selectedProduct(),
-      contact: this.contactForm.value,
-      slot:    this.selectedSlot(),
-    });
+    this.submitting.set(true);
 
-    this.currentStep.set(5);
+    try {
+      const url = await this.bookingService.createCheckout({
+        appointment_id: this.selectedSlot()!.id,
+        customer_name:  this.contactForm.value.fullName,
+        customer_email: this.contactForm.value.email,
+        customer_phone: this.contactForm.value.phone,
+      });
+
+      window.location.href = url;
+
+    } catch (err: any) {
+      this.submitting.set(false); // ← nur bei Fehler zurücksetzen
+      if (err?.status === 409) {
+        alert('Dieser Termin wurde leider gerade von jemand anderem gebucht. Bitte wähle einen anderen Termin.');
+        this.currentStep.set(3);
+        this.selectedSlot.set(undefined);
+        await this.loadSlots(this.selectedProduct()!);
+      } else {
+        alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut.');
+      }
+    }
   }
 }

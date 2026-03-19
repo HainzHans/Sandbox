@@ -166,6 +166,15 @@
   flex-direction: column;
 }
 
+/* --- Search Input */
+.table-caption__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: var(--primary-grey, #64748b);
+}
 
 /* ── Expand Button ───────────────────────────────────────── */
 .expand-btn {

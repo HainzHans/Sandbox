@@ -11,110 +11,201 @@
     </div>
   </div>
 
-  <!-- ── Two-column layout ── -->
-  <div class="columns">
-
-    <!-- ══ LIVETRADING ══ -->
-    <div class="column">
-      <div class="column-header column-header--livetrading">
-        <div class="column-header__left">
-          <span class="column-icon"><i class="pi pi-chart-line"></i></span>
-          <div>
-            <span class="column-label">LiveTrading</span>
-            <span class="column-count">{{ liveTradingAppointments.length }} Termine</span>
-          </div>
-        </div>
-        <button class="btn-add btn-add--livetrading" (click)="openCreate('livetrading')">
-          <i class="pi pi-plus"></i>
-          <span>Hinzufügen</span>
-        </button>
-      </div>
-
-      <div class="appointments-list">
-        @if (liveTradingAppointments.length === 0 && !loading()) {
-          <div class="empty-state">
-            <i class="pi pi-calendar-times"></i>
-            <span>Noch keine Termine</span>
-          </div>
-        }
-
-        @for (appt of liveTradingAppointments; track appt.id) {
-          <div class="appt-card appt-card--livetrading">
-            <div class="appt-card__accent"></div>
-            <div class="appt-card__body">
-              <div class="appt-card__date">
-                <i class="pi pi-calendar"></i>
-                {{ appt.date | formatDate}}
-              </div>
-              <div class="appt-card__time">
-                <i class="pi pi-clock"></i>
-                {{ appt.time | slice:0:5}} Uhr
-              </div>
-            </div>
-            <div class="appt-card__actions">
-              <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
-                <i class="pi pi-pencil"></i>
-              </button>
-              <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
-                <i class="pi pi-trash"></i>
-              </button>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-
-    <!-- ══ MENTORING ══ -->
-    <div class="column">
-      <div class="column-header column-header--mentoring">
-        <div class="column-header__left">
-          <span class="column-icon column-icon--mentoring"><i class="pi pi-users"></i></span>
-          <div>
-            <span class="column-label">Mentoring</span>
-            <span class="column-count">{{ mentoringAppointments.length }} Termine</span>
-          </div>
-        </div>
-        <button class="btn-add btn-add--mentoring" (click)="openCreate('mentoring')">
-          <i class="pi pi-plus"></i>
-          <span>Hinzufügen</span>
-        </button>
-      </div>
-
-      <div class="appointments-list">
-        @if (mentoringAppointments.length === 0) {
-          <div class="empty-state">
-            <i class="pi pi-calendar-times"></i>
-            <span>Noch keine Termine</span>
-          </div>
-        }
-
-        @for (appt of mentoringAppointments; track appt.id) {
-          <div class="appt-card appt-card--mentoring">
-            <div class="appt-card__accent"></div>
-            <div class="appt-card__body">
-              <div class="appt-card__date">
-                <i class="pi pi-calendar"></i>
-                {{ appt.date | formatDate}}
-              </div>
-              <div class="appt-card__time">
-                <i class="pi pi-clock"></i>
-                {{ appt.time | slice:0:5}} Uhr
-              </div>
-            </div>
-            <div class="appt-card__actions">
-              <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
-                <i class="pi pi-pencil"></i>
-              </button>
-              <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
-                <i class="pi pi-trash"></i>
-              </button>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-
+  <!-- ── Tabs ── -->
+  <div class="tabs">
+    <button
+      class="tab-btn"
+      [class.tab-btn--active]="activeTab() === 'manage'"
+      (click)="setTab('manage')"
+    >
+      <i class="pi pi-calendar"></i>
+      Termine verwalten
+    </button>
+    <button
+      class="tab-btn"
+      [class.tab-btn--active]="activeTab() === 'booked'"
+      (click)="setTab('booked')"
+    >
+      <i class="pi pi-check-circle"></i>
+      Gebuchte Termine
+    </button>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB 1: Termine verwalten                              -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  @if (activeTab() === 'manage') {
+    <div class="columns">
+
+      <!-- ══ LIVETRADING ══ -->
+      <div class="column">
+        <div class="column-header column-header--livetrading">
+          <div class="column-header__left">
+            <span class="column-icon"><i class="pi pi-chart-line"></i></span>
+            <div>
+              <span class="column-label">LiveTrading</span>
+              <span class="column-count">{{ liveTradingAppointments.length }} Termine</span>
+            </div>
+          </div>
+          <button class="btn-add btn-add--livetrading" (click)="openCreate('livetrading')">
+            <i class="pi pi-plus"></i>
+            <span>Hinzufügen</span>
+          </button>
+        </div>
+
+        <div class="appointments-list">
+          @if (liveTradingAppointments.length === 0 && !loading()) {
+            <div class="empty-state">
+              <i class="pi pi-calendar-times"></i>
+              <span>Noch keine Termine</span>
+            </div>
+          }
+          @for (appt of liveTradingAppointments; track appt.id) {
+            <div class="appt-card appt-card--livetrading">
+              <div class="appt-card__accent"></div>
+              <div class="appt-card__body">
+                <div class="appt-card__date">
+                  <i class="pi pi-calendar"></i>
+                  {{ appt.date | formatDate }}
+                </div>
+                <div class="appt-card__time">
+                  <i class="pi pi-clock"></i>
+                  {{ appt.time | slice:0:5 }} Uhr
+                </div>
+              </div>
+              <div class="appt-card__actions">
+                <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
+                  <i class="pi pi-pencil"></i>
+                </button>
+                <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ══ MENTORING ══ -->
+      <div class="column">
+        <div class="column-header column-header--mentoring">
+          <div class="column-header__left">
+            <span class="column-icon column-icon--mentoring"><i class="pi pi-users"></i></span>
+            <div>
+              <span class="column-label">Mentoring</span>
+              <span class="column-count">{{ mentoringAppointments.length }} Termine</span>
+            </div>
+          </div>
+          <button class="btn-add btn-add--mentoring" (click)="openCreate('mentoring')">
+            <i class="pi pi-plus"></i>
+            <span>Hinzufügen</span>
+          </button>
+        </div>
+
+        <div class="appointments-list">
+          @if (mentoringAppointments.length === 0 && !loading()) {
+            <div class="empty-state">
+              <i class="pi pi-calendar-times"></i>
+              <span>Noch keine Termine</span>
+            </div>
+          }
+          @for (appt of mentoringAppointments; track appt.id) {
+            <div class="appt-card appt-card--mentoring">
+              <div class="appt-card__accent"></div>
+              <div class="appt-card__body">
+                <div class="appt-card__date">
+                  <i class="pi pi-calendar"></i>
+                  {{ appt.date | formatDate }}
+                </div>
+                <div class="appt-card__time">
+                  <i class="pi pi-clock"></i>
+                  {{ appt.time | slice:0:5 }} Uhr
+                </div>
+              </div>
+              <div class="appt-card__actions">
+                <button class="action-btn action-btn--edit" (click)="openEdit(appt)" title="Bearbeiten">
+                  <i class="pi pi-pencil"></i>
+                </button>
+                <button class="action-btn action-btn--delete" (click)="confirmDelete(appt, $event)" title="Löschen">
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB 2: Gebuchte Termine                               -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  @if (activeTab() === 'booked') {
+    <div class="booked-section">
+
+      @if (loading()) {
+        <div class="empty-state">
+          <i class="pi pi-spin pi-spinner"></i>
+          <span>Termine werden geladen …</span>
+        </div>
+      }
+
+      @if (!loading() && bookedAppointments.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-calendar-times"></i>
+          <span>Keine bevorstehenden gebuchten Termine</span>
+        </div>
+      }
+
+      @if (!loading() && bookedAppointments.length > 0) {
+        <div class="booked-list">
+          @for (appt of bookedAppointments; track appt.id) {
+            <div class="booked-card" [class.booked-card--mentoring]="appt.type === 'mentoring'">
+              <div class="booked-card__accent"></div>
+
+              <div class="booked-card__type">
+                <i class="pi" [class.pi-chart-line]="appt.type === 'livetrading'" [class.pi-users]="appt.type === 'mentoring'"></i>
+                {{ typeLabel(appt.type) }}
+              </div>
+
+              <div class="booked-card__datetime">
+                <span class="booked-card__date">
+                  <i class="pi pi-calendar"></i>
+                  {{ appt.date | formatDate }}
+                </span>
+                <span class="booked-card__time">
+                  <i class="pi pi-clock"></i>
+                  {{ appt.time | slice:0:5 }} Uhr
+                </span>
+              </div>
+
+              <div class="booked-card__customer">
+                <span class="booked-card__name">
+                  <i class="pi pi-user"></i>
+                  {{ appt.customer_name }}
+                </span>
+                <span class="booked-card__email">
+                  <i class="pi pi-envelope"></i>
+                  {{ appt.customer_email }}
+                </span>
+                <span class="booked-card__phone">
+                  <i class="pi pi-phone"></i>
+                  {{ appt.customer_phone }}
+                </span>
+              </div>
+
+              <div class="booked-card__price">
+                {{ appt.price | currency:'EUR':'symbol':'1.0-0' }}
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+    </div>
+  }
+
 </div>
 
 <!-- ── Dialog: Erstellen / Bearbeiten ── -->
@@ -128,7 +219,6 @@
   [style]="{ width: '400px' }"
 >
   <div class="dialog-body">
-
     <div class="dialog-field">
       <label>Datum</label>
       <p-datepicker
@@ -139,7 +229,6 @@
         appendTo="body">
       </p-datepicker>
     </div>
-
     <div class="dialog-field">
       <label>Uhrzeit</label>
       <p-datepicker
@@ -151,7 +240,6 @@
         appendTo="body">
       </p-datepicker>
     </div>
-
   </div>
 
   <ng-template pTemplate="footer">
