@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "Sandbox": {
+    "KingSizeCorp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Sandbox:build:production"
+              "buildTarget": "KingSizeCorp:build:production"
             },
             "development": {
-              "buildTarget": "Sandbox:build:development"
+              "buildTarget": "KingSizeCorp:build:development"
             }
           },
           "defaultConfiguration": "development"

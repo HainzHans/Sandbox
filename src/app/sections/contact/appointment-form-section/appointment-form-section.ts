@@ -120,12 +120,6 @@ export class AppointmentFormSection implements OnInit {
     }
   }
 
-  retry(): void {
-    this.bookingStatus.set(null);
-    this.selectedSlot.set(undefined);
-    this.currentStep.set(3);
-    this.loadSlots(this.selectedProduct()!);
-  }
 
   /* ── Submit ─────────────────────────────────────────────── */
   async submitBooking(): Promise<void> {

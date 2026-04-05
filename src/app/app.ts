@@ -10,7 +10,7 @@ import {InputText} from 'primeng/inputtext';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Sandbox');
+  protected readonly title = signal('KingSize Corp');
 
 
 

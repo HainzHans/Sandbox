@@ -247,7 +247,7 @@
         <h2 class="success-title">Buchung bestätigt!</h2>
         <p class="success-text">
           Du erhältst in Kürze eine Bestätigungs-E-Mail.
-          Wir freuen uns auf dich!
+          Ich freue mich auf dich!
         </p>
         <app-glow-button
           label="Zurück zur Startseite"
@@ -260,23 +260,12 @@
     <!-- Step 5: Zahlung abgebrochen -->
     @if (currentStep() === 5 && bookingStatus() === 'cancel') {
       <div class="booking-card booking-card--cancel">
-        <div class="cancel-animation">
-          <div class="cancel-ring"></div>
-          <div class="cancel-icon">
-            <i class="pi pi-times"></i>
-          </div>
-        </div>
         <h2 class="cancel-title">Zahlung abgebrochen</h2>
         <p class="cancel-text">
           Der Bezahlvorgang wurde abgebrochen.
           Der Termin wird in Kürze automatisch wieder freigegeben.
         </p>
         <div class="booking-card__actions">
-          <app-glow-button
-            label="Erneut versuchen"
-            icon="pi-refresh"
-            (onClick)="retry()"
-          ></app-glow-button>
           <app-glow-button
             label="Zur Startseite"
             icon="pi-home"
