@@ -43,6 +43,11 @@
   }
 }
 
+.data-navigation:hover {
+  cursor: pointer;
+  color: var(--primary-white, #f1f5f9);
+}
+
 @media (min-width: 800px) {
   .footer-top-wrapper {
     flex-direction: row;

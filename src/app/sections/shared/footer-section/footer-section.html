@@ -14,9 +14,11 @@
       </div>
     </div>
     <div class="footer-bottom-wrapper">
-      <span class="grey-text">Impressum</span>
+      <span class="grey-text data-navigation" (click)="navigateTo('/impressum')">Impressum</span>
       <app-small-dot-component></app-small-dot-component>
-      <span class="grey-text">Datenschutz</span>
+      <span class="grey-text data-navigation" (click)="navigateTo('/agb')">AGB</span>
+      <app-small-dot-component></app-small-dot-component>
+      <span class="grey-text data-navigation" (click)="navigateTo('/datenschutz')">Datenschutz</span>
       <app-small-dot-component></app-small-dot-component>
       <a
       href="https://www.provenexpert.com/de-de/marcel-dichter/#ratings"
