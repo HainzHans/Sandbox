@@ -19,7 +19,8 @@ export const routes: Routes = [
   { path: 'admin-login', component: AdminLoginComponent },
   {
     path: 'admin',
-    component: SidebarComponent,
+    loadComponent: () => import('./components/sidebar-component/sidebar-component')
+      .then(m => m.SidebarComponent),
     canActivate: [adminGuard],
     children: [
       { path: 'admin-overview', component: AdminOverviewPage, canActivate: [adminGuard] },

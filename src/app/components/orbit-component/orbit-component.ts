@@ -7,6 +7,7 @@ import {AfterViewInit, Component, ElementRef} from '@angular/core';
   styleUrl: './orbit-component.css',
 })
 export class OrbitComponent implements AfterViewInit {
+  private animationId: number = 0;
 
   constructor(private el: ElementRef) {}
 
@@ -41,10 +42,14 @@ export class OrbitComponent implements AfterViewInit {
       icon3.style.transform = `translate(-50%, -50%) matrix(1,0,0,1,${r3*Math.cos(angle3)},${r3*Math.sin(angle3)})`;
       icon4.style.transform = `translate(-50%, -50%) matrix(1,0,0,1,${r4*Math.cos(angle4)},${r4*Math.sin(angle4)})`;
 
-      requestAnimationFrame(animate);
+      this.animationId = requestAnimationFrame(animate);
     };
 
     animate();
+  }
+
+  ngOnDestroy() {
+    cancelAnimationFrame(this.animationId);
   }
 
 
