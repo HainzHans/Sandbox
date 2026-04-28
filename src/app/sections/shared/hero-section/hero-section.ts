@@ -27,9 +27,24 @@ export class HeroSection implements AfterViewInit{
 
   ngAfterViewInit() {
     const video = document.querySelector('.video-background') as HTMLVideoElement;
-    if (video) {
-      video.muted = true;
-      video.play().catch(() => {});
+    if (!video) return;
+
+    video.muted = true;
+    video.load(); // explizit neu laden
+
+    const tryPlay = () => {
+      video.play().catch(() => {
+        // Fallback: bei erster User-Interaktion nochmal versuchen
+        document.addEventListener('click', () => video.play(), { once: true });
+        document.addEventListener('touchstart', () => video.play(), { once: true });
+      });
+    };
+
+    // Warten bis genug Daten geladen sind
+    if (video.readyState >= 3) {
+      tryPlay();
+    } else {
+      video.addEventListener('canplay', tryPlay, { once: true });
     }
   }
 
